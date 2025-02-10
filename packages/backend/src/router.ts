@@ -2,8 +2,17 @@ import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import caregivers from './routes/users'
 import events from './routes/events';
+import { cors } from 'hono/cors';
 
 const app = new Hono().basePath('/api')
+
+app.use('/*', cors({
+  origin: 'http://localhost:3001', // Your frontend URL
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  // allowHeaders: ['Content-Type', 'Authorization'],
+  // exposeHeaders: ['Content-Length', 'X-Requested-With'],
+  // credentials: true,
+}))
 
 app.get('/', (c) => {
   return c.text('Welcome to the nursery!')

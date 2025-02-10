@@ -17,9 +17,6 @@
     ],    "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "esModuleInterop": true,
-    "paths": {
-      "~/*": ["packages/backend/*", "packages/app/*"],
-    },
     "forceConsistentCasingInFileNames": true,
   },
   "isolatedModules": true,

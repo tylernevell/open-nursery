@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "yarn workspace @internal/app dev & yarn workspace @internal/backend dev",
+    "dev": "yarn workspaces foreach -A --include @internal/app --include @internal/backend --parallel --jobs unlimited -v -i run dev",
     "start-app": "tsx start src/app/src/main.tsx"
   },
   "devDependencies": {
