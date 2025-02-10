@@ -2,17 +2,33 @@
   "name": "open-nursery",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": "20 || 22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurtaking/open-nursery.git"
+  },
   "scripts": {
     "dev": "yarn workspaces foreach -A --include @internal/app --include @internal/backend --parallel --jobs unlimited -v -i run dev",
-    "start-app": "tsx start src/app/src/main.tsx"
+    "format": "prettier . --write",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.30.4",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^3.5.0",
     "tsx": "^4.19.2"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "packageManager": "yarn@4.6.0"
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "packageManager": "yarn@4.6.0",
+  "lint-staged": {
+    "*.--write": "prettier --write"
+  }
 }

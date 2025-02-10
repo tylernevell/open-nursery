@@ -1,33 +1,34 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { fetchApi } from '../lib/api'
+import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { fetchApi } from "../lib/api";
 
 export type Caregiver = {
-  id: string
-  email: string
-  name: string
-  createdAt: Date
-  updatedAt: Date
-}
+  id: string;
+  email: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
-export const Route = createFileRoute('/users')({
+export const Route = createFileRoute("/users")({
   component: UsersComponent,
-})
+});
 
 function UsersComponent() {
   const { data, error, isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => fetchApi<{
-      users: Caregiver[]
-    }>('/caregivers'),
-  })
+    queryKey: ["users"],
+    queryFn: () =>
+      fetchApi<{
+        users: Caregiver[];
+      }>("/caregivers"),
+  });
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-  const { users } = data?.data ?? { users: [] }
+  const { users } = data?.data ?? { users: [] };
 
-  console.log({users})
+  console.log({ users });
 
   return (
     <div className="p-2">
@@ -41,5 +42,5 @@ function UsersComponent() {
         ))}
       </div>
     </div>
-  )
+  );
 }

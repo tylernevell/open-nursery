@@ -1,4 +1,4 @@
-import { ChartBar, Home, Logs, Settings } from "lucide-react"
+import { ChartBar, Home, Logs, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -8,7 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "~/components/ui/sidebar"
+} from "~/components/ui/sidebar";
 
 const items = [
   {
@@ -31,7 +31,7 @@ const items = [
     url: "/users",
     icon: Settings,
   },
-]
+];
 
 export function AppSidebar() {
   return (
@@ -56,5 +56,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

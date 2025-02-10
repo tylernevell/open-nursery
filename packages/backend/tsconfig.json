@@ -9,16 +9,14 @@
     "strict": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "esModuleInterop": true,
     "paths": {
-      "~/*": ["src/backend/*", "./src/db/*"],
+      "~/*": ["src/backend/*", "./src/db/*"]
     },
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   "isolatedModules": true,
   "resolveJsonModule": true,
