@@ -1,17 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Baby, Clock, BarChart3, Github } from "lucide-react";
+import { SignedOutNavigation } from "~/components/signed-out/SignedOutNavigation";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 
 export const Route = createFileRoute("/")({
-  component: HomeComponent,
+  component: LandingPage,
 });
 
-function HomeComponent() {
+function LandingPage() {
   return (
     <div>
+      <SignedOutNavigation />
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
+      <section className="container mx-auto py-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Track Your Baby's Journey
         </h1>
@@ -20,11 +22,6 @@ function HomeComponent() {
           sleep, and milestones in one simple dashboard. Make data-driven
           parenting decisions with powerful insights and trends.
         </p>
-        {/* <div className="flex gap-4 justify-center">
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-            Get Started
-          </Button>
-        </div> */}
       </section>
 
       {/* Features Section */}
@@ -78,6 +75,13 @@ function HomeComponent() {
           </Button>
         </div>
       </section>
+
+      {/* <section className="container mx-auto text-center">
+        <h2 className="text-3xl font-bold text-center mb-12">Ready?</h2>
+        <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+          <Link to="/sign-up">Get Started</Link>
+        </Button>
+      </section> */}
     </div>
   );
 }
