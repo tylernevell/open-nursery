@@ -1,0 +1,28 @@
+{
+  "include": [
+    "packages/*/src",
+  ],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "esModuleInterop": true,
+    "paths": {
+      "~/*": ["packages/backend/*", "packages/app/*"],
+    },
+    "forceConsistentCasingInFileNames": true,
+  },
+  "isolatedModules": true,
+  "resolveJsonModule": true,
+  "noEmit": true
+}

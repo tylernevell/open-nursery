@@ -1,0 +1,28 @@
+{
+  "name": "@internal/backend",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/router.ts",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit pull",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "npx tsx src/db/seed.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "@hono/zod-validator": "^0.4.2",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.3",
+    "drizzle-zod": "^0.7.0",
+    "hono": "^4.6.20",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "drizzle-kit": "^0.30.4",
+    "tsx": "^4.19.2"
+  }
+}
