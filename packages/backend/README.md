@@ -1,8 +1,10 @@
-```
-npm install
-npm run dev
+# @internal/backend
+
+## Local developement
+
+```bash
+yarn install
+yarn dev
 ```
 
-```
-open http://localhost:3000
-```
+The backend will be listening for requests on [http://localhost:3000](http://localhost:3000).
