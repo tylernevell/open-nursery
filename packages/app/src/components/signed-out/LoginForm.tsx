@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -10,8 +10,6 @@ import {
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { Alert, AlertDescription } from "~/components/ui/alert";
-import { Checkbox } from "~/components/ui/checkbox";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -64,87 +62,106 @@ const LoginForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Welcome Back</CardTitle>
-        <CardDescription>
-          Login to continue tracking your baby's journey
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <Label htmlFor="password">Password</Label>
-              <Button
-                variant="link"
-                className="p-0 h-auto text-sm"
-                type="button"
-              >
-                Forgot password?
-              </Button>
+    <Card>
+      <form>
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
+              />
             </div>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-            />
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <a
+                  href="#"
+                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                >
+                  Forgot your password?
+                </a>
+              </div>
+              <Input id="password" type="password" required />
+            </div>
           </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="rememberMe"
-              name="rememberMe"
-              checked={formData.rememberMe}
-              onCheckedChange={(checked) =>
-                handleChange({
-                  target: { name: "rememberMe", type: "checkbox", checked },
-                })
-              }
-            />
-            <Label htmlFor="rememberMe" className="text-sm font-normal">
-              Remember me
-            </Label>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
+          <Button variant="outline" className="w-full">
+            Login with Google
+          </Button>
+          <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <a href="#" className="underline underline-offset-4">
+              Sign up
+            </a>
           </div>
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Logging in..." : "Log In"}
-          </Button>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-center">
-        <p className="text-sm text-gray-500">
-          Don't have an account?{" "}
-          <Button variant="link" className="p-0 h-auto">
-            Create one
-          </Button>
-        </p>
-      </CardFooter>
+        </CardFooter>
+      </form>
     </Card>
   );
 };
 
 export default LoginForm;
+
+//  <Card>
+//    <form>
+//      <CardHeader>
+//        <CardTitle>Login to your account</CardTitle>
+//        <CardDescription>
+//          Enter your email below to login to your account
+//        </CardDescription>
+//      </CardHeader>
+//      <CardContent>
+//        <div className="flex flex-col gap-6">
+//          <div className="grid gap-2">
+//            <Label htmlFor="email">Email</Label>
+//            <Input
+//              id="email"
+//              type="email"
+//              placeholder="m@example.com"
+//              required
+//            />
+//          </div>
+//          <div className="grid gap-2">
+//            <div className="flex items-center">
+//              <Label htmlFor="password">Password</Label>
+//              <a
+//                href="#"
+//                className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+//              >
+//                Forgot your password?
+//              </a>
+//            </div>
+//            <Input id="password" type="password" required />
+//          </div>
+//        </div>
+//      </CardContent>
+//      <CardFooter className="flex-col gap-2">
+//        <Button type="submit" className="w-full">
+//          Login
+//        </Button>
+//        <Button variant="outline" className="w-full">
+//          Login with Google
+//        </Button>
+//        <div className="mt-4 text-center text-sm">
+//          Don&apos;t have an account?{" "}
+//          <a href="#" className="underline underline-offset-4">
+//            Sign up
+//          </a>
+//        </div>
+//      </CardFooter>
+//    </form>
+//  </Card>;
