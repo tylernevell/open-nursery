@@ -1,7 +1,6 @@
 {
   "name": "@internal/backend",
   "type": "module",
-  "private": true,
   "scripts": {
     "dev": "tsx watch src/router.ts",
     "db:push": "drizzle-kit push",

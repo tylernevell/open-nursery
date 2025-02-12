@@ -1,4 +1,3 @@
-import { zValidator } from "@hono/zod-validator";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import {
@@ -8,7 +7,6 @@ import {
   diaperEventsTable,
 } from "~/schema/events";
 import { nurseryDb } from "~/service";
-import { createEventSchema } from "~/types";
 
 const app = new Hono();
 
@@ -30,7 +28,7 @@ app.get("/:id", async (c) => {
 });
 
 // Create new event
-app.post("/", zValidator("json", createEventSchema), async (c) => {
+app.post("/", async (c) => {
   const body = await c.req.json();
   const { type, ...eventData } = body;
 

@@ -1,5 +1,5 @@
 {
-  "include": ["packages/*/src"],
+  // "include": ["packages/*/src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -14,9 +14,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "isolatedModules": true,
-  "resolveJsonModule": true,
-  "noEmit": true
+    "noEmit": true
+  }
+  // "isolatedModules": true,
+  // "resolveJsonModule": true,
 }

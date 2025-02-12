@@ -1,6 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import caregivers from "./routes/users";
+import caregivers from "./routes/caregiver";
+import babies from "./routes/baby";
 import events from "./routes/events";
 import { cors } from "hono/cors";
 
@@ -26,6 +27,7 @@ app.get("/health", (c) => {
 });
 
 app.route("/caregivers", caregivers);
+app.route("/babies", babies);
 app.route("/events", events);
 
 const port = 3000;
