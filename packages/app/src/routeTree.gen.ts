@@ -11,117 +11,230 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as UsersImport } from './routes/users'
-import { Route as SignUpImport } from './routes/sign-up'
-import { Route as LoginImport } from './routes/login'
-import { Route as IndexImport } from './routes/index'
+import { Route as LayoutImport } from './routes/_layout'
+import { Route as AuthedImport } from './routes/_authed'
+import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutSignUpImport } from './routes/_layout/sign-up'
+import { Route as LayoutLoginImport } from './routes/_layout/login'
+import { Route as AuthedDailyLogImport } from './routes/_authed/daily-log'
+import { Route as AuthedCaregiversIndexImport } from './routes/_authed/caregivers/index'
+import { Route as AuthedCaregiversManageImport } from './routes/_authed/caregivers/manage'
 
 // Create/Update Routes
 
-const UsersRoute = UsersImport.update({
-  id: '/users',
-  path: '/users',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SignUpRoute = SignUpImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
+const AuthedRoute = AuthedImport.update({
+  id: '/_authed',
   getParentRoute: () => rootRoute,
 } as any)
 
-const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutSignUpRoute = LayoutSignUpImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutLoginRoute = LayoutLoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const AuthedDailyLogRoute = AuthedDailyLogImport.update({
+  id: '/daily-log',
+  path: '/daily-log',
+  getParentRoute: () => AuthedRoute,
+} as any)
+
+const AuthedCaregiversIndexRoute = AuthedCaregiversIndexImport.update({
+  id: '/caregivers/',
+  path: '/caregivers/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+
+const AuthedCaregiversManageRoute = AuthedCaregiversManageImport.update({
+  id: '/caregivers/manage',
+  path: '/caregivers/manage',
+  getParentRoute: () => AuthedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthedImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      id: '/login'
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authed/daily-log': {
+      id: '/_authed/daily-log'
+      path: '/daily-log'
+      fullPath: '/daily-log'
+      preLoaderRoute: typeof AuthedDailyLogImport
+      parentRoute: typeof AuthedImport
+    }
+    '/_layout/login': {
+      id: '/_layout/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutLoginImport
+      parentRoute: typeof LayoutImport
     }
-    '/sign-up': {
-      id: '/sign-up'
+    '/_layout/sign-up': {
+      id: '/_layout/sign-up'
       path: '/sign-up'
       fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutSignUpImport
+      parentRoute: typeof LayoutImport
     }
-    '/users': {
-      id: '/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersImport
-      parentRoute: typeof rootRoute
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_authed/caregivers/manage': {
+      id: '/_authed/caregivers/manage'
+      path: '/caregivers/manage'
+      fullPath: '/caregivers/manage'
+      preLoaderRoute: typeof AuthedCaregiversManageImport
+      parentRoute: typeof AuthedImport
+    }
+    '/_authed/caregivers/': {
+      id: '/_authed/caregivers/'
+      path: '/caregivers'
+      fullPath: '/caregivers'
+      preLoaderRoute: typeof AuthedCaregiversIndexImport
+      parentRoute: typeof AuthedImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AuthedRouteChildren {
+  AuthedDailyLogRoute: typeof AuthedDailyLogRoute
+  AuthedCaregiversManageRoute: typeof AuthedCaregiversManageRoute
+  AuthedCaregiversIndexRoute: typeof AuthedCaregiversIndexRoute
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedDailyLogRoute: AuthedDailyLogRoute,
+  AuthedCaregiversManageRoute: AuthedCaregiversManageRoute,
+  AuthedCaregiversIndexRoute: AuthedCaregiversIndexRoute,
+}
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
+interface LayoutRouteChildren {
+  LayoutLoginRoute: typeof LayoutLoginRoute
+  LayoutSignUpRoute: typeof LayoutSignUpRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutLoginRoute: LayoutLoginRoute,
+  LayoutSignUpRoute: LayoutSignUpRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
-  '/users': typeof UsersRoute
+  '': typeof LayoutRouteWithChildren
+  '/daily-log': typeof AuthedDailyLogRoute
+  '/login': typeof LayoutLoginRoute
+  '/sign-up': typeof LayoutSignUpRoute
+  '/': typeof LayoutIndexRoute
+  '/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/caregivers': typeof AuthedCaregiversIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
-  '/users': typeof UsersRoute
+  '': typeof AuthedRouteWithChildren
+  '/daily-log': typeof AuthedDailyLogRoute
+  '/login': typeof LayoutLoginRoute
+  '/sign-up': typeof LayoutSignUpRoute
+  '/': typeof LayoutIndexRoute
+  '/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/caregivers': typeof AuthedCaregiversIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/sign-up': typeof SignUpRoute
-  '/users': typeof UsersRoute
+  '/_authed': typeof AuthedRouteWithChildren
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_authed/daily-log': typeof AuthedDailyLogRoute
+  '/_layout/login': typeof LayoutLoginRoute
+  '/_layout/sign-up': typeof LayoutSignUpRoute
+  '/_layout/': typeof LayoutIndexRoute
+  '/_authed/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/_authed/caregivers/': typeof AuthedCaregiversIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/sign-up' | '/users'
+  fullPaths:
+    | ''
+    | '/daily-log'
+    | '/login'
+    | '/sign-up'
+    | '/'
+    | '/caregivers/manage'
+    | '/caregivers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/sign-up' | '/users'
-  id: '__root__' | '/' | '/login' | '/sign-up' | '/users'
+  to:
+    | ''
+    | '/daily-log'
+    | '/login'
+    | '/sign-up'
+    | '/'
+    | '/caregivers/manage'
+    | '/caregivers'
+  id:
+    | '__root__'
+    | '/_authed'
+    | '/_layout'
+    | '/_authed/daily-log'
+    | '/_layout/login'
+    | '/_layout/sign-up'
+    | '/_layout/'
+    | '/_authed/caregivers/manage'
+    | '/_authed/caregivers/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
-  SignUpRoute: typeof SignUpRoute
-  UsersRoute: typeof UsersRoute
+  AuthedRoute: typeof AuthedRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  SignUpRoute: SignUpRoute,
-  UsersRoute: UsersRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -134,23 +247,49 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/login",
-        "/sign-up",
-        "/users"
+        "/_authed",
+        "/_layout"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_authed": {
+      "filePath": "_authed.tsx",
+      "children": [
+        "/_authed/daily-log",
+        "/_authed/caregivers/manage",
+        "/_authed/caregivers/"
+      ]
     },
-    "/login": {
-      "filePath": "login.tsx"
+    "/_layout": {
+      "filePath": "_layout.tsx",
+      "children": [
+        "/_layout/login",
+        "/_layout/sign-up",
+        "/_layout/"
+      ]
     },
-    "/sign-up": {
-      "filePath": "sign-up.tsx"
+    "/_authed/daily-log": {
+      "filePath": "_authed/daily-log.tsx",
+      "parent": "/_authed"
     },
-    "/users": {
-      "filePath": "users.tsx"
+    "/_layout/login": {
+      "filePath": "_layout/login.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/sign-up": {
+      "filePath": "_layout/sign-up.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/": {
+      "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_authed/caregivers/manage": {
+      "filePath": "_authed/caregivers/manage.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/caregivers/": {
+      "filePath": "_authed/caregivers/index.tsx",
+      "parent": "/_authed"
     }
   }
 }

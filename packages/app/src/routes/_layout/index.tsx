@@ -1,17 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Baby, Clock, BarChart3, Github } from "lucide-react";
-import { SignedOutNavigation } from "~/components/signed-out/SignedOutNavigation";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
+import { createFileRoute } from '@tanstack/react-router'
+import { Heart, Baby, Clock, BarChart3, Github } from 'lucide-react'
+import { Button } from '~/components/ui/button'
+import { Card, CardContent } from '~/components/ui/card'
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/_layout/')({
   component: LandingPage,
-});
+})
 
 function LandingPage() {
   return (
     <div>
-      <SignedOutNavigation />
       {/* Hero Section */}
       <section className="container mx-auto py-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
@@ -67,7 +65,7 @@ function LandingPage() {
             variant="outline"
             className="gap-2"
             onClick={() =>
-              window.open("https://github.com/kurtaking/opennursery")
+              window.open('https://github.com/kurtaking/opennursery')
             }
           >
             <Github className="w-5 h-5" />
@@ -75,15 +73,8 @@ function LandingPage() {
           </Button>
         </div>
       </section>
-
-      {/* <section className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-center mb-12">Ready?</h2>
-        <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-          <Link to="/sign-up">Get Started</Link>
-        </Button>
-      </section> */}
     </div>
-  );
+  )
 }
 
 const FeatureCard = ({
@@ -91,9 +82,9 @@ const FeatureCard = ({
   title,
   description,
 }: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
+  icon: React.ReactNode
+  title: string
+  description: string
 }) => (
   <Card className="text-center p-6">
     <CardContent>
@@ -102,4 +93,4 @@ const FeatureCard = ({
       <p className="text-gray-600">{description}</p>
     </CardContent>
   </Card>
-);
+)
