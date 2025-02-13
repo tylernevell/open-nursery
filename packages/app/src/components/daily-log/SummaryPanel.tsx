@@ -9,7 +9,11 @@ export function SummaryPanel({ title, items }: SummaryPanelProps) {
   return (
     <Card>
       <CardContent className="p-4">
-        <h3 className="font-semibold mb-4">{title}</h3>
+        <h3 className="font-semibold mb-4">
+          {title}
+          <hr />
+        </h3>
+
         <div className="space-y-2">
           {items.map((item, i) => (
             <div key={i} className="flex items-center justify-between">

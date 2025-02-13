@@ -10,8 +10,9 @@ function TaskItem({ time, label, type }: TaskItemProps) {
   return (
     <div className="flex items-center justify-between border-b border-border pb-2 last:border-0 last:pb-0">
       <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-primary"></div>
+        {/* <div className="h-2 w-2 rounded-full bg-primary"></div> */}
         <span className="font-medium">{label}</span>
+        {/* <span className="font-medium">{type}</span> */}
       </div>
       <time className="text-sm text-muted-foreground">{time}</time>
     </div>
