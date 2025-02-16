@@ -5,11 +5,14 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import "~/styles/app.css";
 import { NavMain } from "./nav-main";
 
-const navMain = [
+const navMainItems = [
   {
     title: "Daily Log",
     url: "#",
@@ -19,6 +22,10 @@ const navMain = [
       {
         title: "Dashboard",
         url: "/daily-log",
+      },
+      {
+        title: "History",
+        url: "/daily-log/history",
       },
     ],
   },
@@ -31,26 +38,23 @@ const navMain = [
         title: "Overview",
         url: "/caregivers",
       },
-      {
-        title: "Schedule",
-        url: "/caregivers",
-      },
+      // {
+      //   title: "Schedule",
+      //   url: "/caregivers/schedule",
+      // },
       {
         title: "Manage",
         url: "/caregivers/manage",
       },
     ],
   },
+];
+
+const sidebarMenuItems = [
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings2,
-    items: [
-      {
-        title: "General",
-        url: "#",
-      },
-    ],
   },
 ];
 
@@ -61,7 +65,20 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>OpenNursery</SidebarGroupLabel>
           <SidebarGroupContent>
-            <NavMain items={navMain} />
+            <NavMain items={navMainItems} />
+            <SidebarMenu>
+              {sidebarMenuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+
             {/* <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>

@@ -8,6 +8,8 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
@@ -16,9 +18,16 @@ import { Route as AuthedImport } from './routes/_authed'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutSignUpImport } from './routes/_layout/sign-up'
 import { Route as LayoutLoginImport } from './routes/_layout/login'
-import { Route as AuthedDailyLogImport } from './routes/_authed/daily-log'
+import { Route as AuthedDailyLogIndexImport } from './routes/_authed/daily-log/index'
 import { Route as AuthedCaregiversIndexImport } from './routes/_authed/caregivers/index'
+import { Route as AuthedSettingsSettingsLayoutImport } from './routes/_authed/settings/_settings-layout'
+import { Route as AuthedDailyLogHistoryImport } from './routes/_authed/daily-log/history'
 import { Route as AuthedCaregiversManageImport } from './routes/_authed/caregivers/manage'
+import { Route as AuthedSettingsSettingsLayoutIndexImport } from './routes/_authed/settings/_settings-layout/index'
+
+// Create Virtual Routes
+
+const AuthedSettingsImport = createFileRoute('/_authed/settings')()
 
 // Create/Update Routes
 
@@ -30,6 +39,12 @@ const LayoutRoute = LayoutImport.update({
 const AuthedRoute = AuthedImport.update({
   id: '/_authed',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AuthedSettingsRoute = AuthedSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthedRoute,
 } as any)
 
 const LayoutIndexRoute = LayoutIndexImport.update({
@@ -50,9 +65,9 @@ const LayoutLoginRoute = LayoutLoginImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const AuthedDailyLogRoute = AuthedDailyLogImport.update({
-  id: '/daily-log',
-  path: '/daily-log',
+const AuthedDailyLogIndexRoute = AuthedDailyLogIndexImport.update({
+  id: '/daily-log/',
+  path: '/daily-log/',
   getParentRoute: () => AuthedRoute,
 } as any)
 
@@ -62,11 +77,30 @@ const AuthedCaregiversIndexRoute = AuthedCaregiversIndexImport.update({
   getParentRoute: () => AuthedRoute,
 } as any)
 
+const AuthedSettingsSettingsLayoutRoute =
+  AuthedSettingsSettingsLayoutImport.update({
+    id: '/_settings-layout',
+    getParentRoute: () => AuthedSettingsRoute,
+  } as any)
+
+const AuthedDailyLogHistoryRoute = AuthedDailyLogHistoryImport.update({
+  id: '/daily-log/history',
+  path: '/daily-log/history',
+  getParentRoute: () => AuthedRoute,
+} as any)
+
 const AuthedCaregiversManageRoute = AuthedCaregiversManageImport.update({
   id: '/caregivers/manage',
   path: '/caregivers/manage',
   getParentRoute: () => AuthedRoute,
 } as any)
+
+const AuthedSettingsSettingsLayoutIndexRoute =
+  AuthedSettingsSettingsLayoutIndexImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthedSettingsSettingsLayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -85,13 +119,6 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
-    }
-    '/_authed/daily-log': {
-      id: '/_authed/daily-log'
-      path: '/daily-log'
-      fullPath: '/daily-log'
-      preLoaderRoute: typeof AuthedDailyLogImport
-      parentRoute: typeof AuthedImport
     }
     '/_layout/login': {
       id: '/_layout/login'
@@ -121,6 +148,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCaregiversManageImport
       parentRoute: typeof AuthedImport
     }
+    '/_authed/daily-log/history': {
+      id: '/_authed/daily-log/history'
+      path: '/daily-log/history'
+      fullPath: '/daily-log/history'
+      preLoaderRoute: typeof AuthedDailyLogHistoryImport
+      parentRoute: typeof AuthedImport
+    }
+    '/_authed/settings': {
+      id: '/_authed/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthedSettingsImport
+      parentRoute: typeof AuthedImport
+    }
+    '/_authed/settings/_settings-layout': {
+      id: '/_authed/settings/_settings-layout'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthedSettingsSettingsLayoutImport
+      parentRoute: typeof AuthedSettingsRoute
+    }
     '/_authed/caregivers/': {
       id: '/_authed/caregivers/'
       path: '/caregivers'
@@ -128,21 +176,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCaregiversIndexImport
       parentRoute: typeof AuthedImport
     }
+    '/_authed/daily-log/': {
+      id: '/_authed/daily-log/'
+      path: '/daily-log'
+      fullPath: '/daily-log'
+      preLoaderRoute: typeof AuthedDailyLogIndexImport
+      parentRoute: typeof AuthedImport
+    }
+    '/_authed/settings/_settings-layout/': {
+      id: '/_authed/settings/_settings-layout/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AuthedSettingsSettingsLayoutIndexImport
+      parentRoute: typeof AuthedSettingsSettingsLayoutImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AuthedSettingsSettingsLayoutRouteChildren {
+  AuthedSettingsSettingsLayoutIndexRoute: typeof AuthedSettingsSettingsLayoutIndexRoute
+}
+
+const AuthedSettingsSettingsLayoutRouteChildren: AuthedSettingsSettingsLayoutRouteChildren =
+  {
+    AuthedSettingsSettingsLayoutIndexRoute:
+      AuthedSettingsSettingsLayoutIndexRoute,
+  }
+
+const AuthedSettingsSettingsLayoutRouteWithChildren =
+  AuthedSettingsSettingsLayoutRoute._addFileChildren(
+    AuthedSettingsSettingsLayoutRouteChildren,
+  )
+
+interface AuthedSettingsRouteChildren {
+  AuthedSettingsSettingsLayoutRoute: typeof AuthedSettingsSettingsLayoutRouteWithChildren
+}
+
+const AuthedSettingsRouteChildren: AuthedSettingsRouteChildren = {
+  AuthedSettingsSettingsLayoutRoute:
+    AuthedSettingsSettingsLayoutRouteWithChildren,
+}
+
+const AuthedSettingsRouteWithChildren = AuthedSettingsRoute._addFileChildren(
+  AuthedSettingsRouteChildren,
+)
+
 interface AuthedRouteChildren {
-  AuthedDailyLogRoute: typeof AuthedDailyLogRoute
   AuthedCaregiversManageRoute: typeof AuthedCaregiversManageRoute
+  AuthedDailyLogHistoryRoute: typeof AuthedDailyLogHistoryRoute
+  AuthedSettingsRoute: typeof AuthedSettingsRouteWithChildren
   AuthedCaregiversIndexRoute: typeof AuthedCaregiversIndexRoute
+  AuthedDailyLogIndexRoute: typeof AuthedDailyLogIndexRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
-  AuthedDailyLogRoute: AuthedDailyLogRoute,
   AuthedCaregiversManageRoute: AuthedCaregiversManageRoute,
+  AuthedDailyLogHistoryRoute: AuthedDailyLogHistoryRoute,
+  AuthedSettingsRoute: AuthedSettingsRouteWithChildren,
   AuthedCaregiversIndexRoute: AuthedCaregiversIndexRoute,
+  AuthedDailyLogIndexRoute: AuthedDailyLogIndexRoute,
 }
 
 const AuthedRouteWithChildren =
@@ -165,65 +259,83 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
-  '/daily-log': typeof AuthedDailyLogRoute
   '/login': typeof LayoutLoginRoute
   '/sign-up': typeof LayoutSignUpRoute
   '/': typeof LayoutIndexRoute
   '/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/daily-log/history': typeof AuthedDailyLogHistoryRoute
+  '/settings': typeof AuthedSettingsSettingsLayoutRouteWithChildren
   '/caregivers': typeof AuthedCaregiversIndexRoute
+  '/daily-log': typeof AuthedDailyLogIndexRoute
+  '/settings/': typeof AuthedSettingsSettingsLayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
   '': typeof AuthedRouteWithChildren
-  '/daily-log': typeof AuthedDailyLogRoute
   '/login': typeof LayoutLoginRoute
   '/sign-up': typeof LayoutSignUpRoute
   '/': typeof LayoutIndexRoute
   '/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/daily-log/history': typeof AuthedDailyLogHistoryRoute
+  '/settings': typeof AuthedSettingsSettingsLayoutIndexRoute
   '/caregivers': typeof AuthedCaregiversIndexRoute
+  '/daily-log': typeof AuthedDailyLogIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authed': typeof AuthedRouteWithChildren
   '/_layout': typeof LayoutRouteWithChildren
-  '/_authed/daily-log': typeof AuthedDailyLogRoute
   '/_layout/login': typeof LayoutLoginRoute
   '/_layout/sign-up': typeof LayoutSignUpRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_authed/caregivers/manage': typeof AuthedCaregiversManageRoute
+  '/_authed/daily-log/history': typeof AuthedDailyLogHistoryRoute
+  '/_authed/settings': typeof AuthedSettingsRouteWithChildren
+  '/_authed/settings/_settings-layout': typeof AuthedSettingsSettingsLayoutRouteWithChildren
   '/_authed/caregivers/': typeof AuthedCaregiversIndexRoute
+  '/_authed/daily-log/': typeof AuthedDailyLogIndexRoute
+  '/_authed/settings/_settings-layout/': typeof AuthedSettingsSettingsLayoutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/daily-log'
     | '/login'
     | '/sign-up'
     | '/'
     | '/caregivers/manage'
+    | '/daily-log/history'
+    | '/settings'
     | '/caregivers'
+    | '/daily-log'
+    | '/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
-    | '/daily-log'
     | '/login'
     | '/sign-up'
     | '/'
     | '/caregivers/manage'
+    | '/daily-log/history'
+    | '/settings'
     | '/caregivers'
+    | '/daily-log'
   id:
     | '__root__'
     | '/_authed'
     | '/_layout'
-    | '/_authed/daily-log'
     | '/_layout/login'
     | '/_layout/sign-up'
     | '/_layout/'
     | '/_authed/caregivers/manage'
+    | '/_authed/daily-log/history'
+    | '/_authed/settings'
+    | '/_authed/settings/_settings-layout'
     | '/_authed/caregivers/'
+    | '/_authed/daily-log/'
+    | '/_authed/settings/_settings-layout/'
   fileRoutesById: FileRoutesById
 }
 
@@ -254,9 +366,11 @@ export const routeTree = rootRoute
     "/_authed": {
       "filePath": "_authed.tsx",
       "children": [
-        "/_authed/daily-log",
         "/_authed/caregivers/manage",
-        "/_authed/caregivers/"
+        "/_authed/daily-log/history",
+        "/_authed/settings",
+        "/_authed/caregivers/",
+        "/_authed/daily-log/"
       ]
     },
     "/_layout": {
@@ -266,10 +380,6 @@ export const routeTree = rootRoute
         "/_layout/sign-up",
         "/_layout/"
       ]
-    },
-    "/_authed/daily-log": {
-      "filePath": "_authed/daily-log.tsx",
-      "parent": "/_authed"
     },
     "/_layout/login": {
       "filePath": "_layout/login.tsx",
@@ -287,9 +397,35 @@ export const routeTree = rootRoute
       "filePath": "_authed/caregivers/manage.tsx",
       "parent": "/_authed"
     },
+    "/_authed/daily-log/history": {
+      "filePath": "_authed/daily-log/history.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/settings": {
+      "filePath": "_authed/settings",
+      "parent": "/_authed",
+      "children": [
+        "/_authed/settings/_settings-layout"
+      ]
+    },
+    "/_authed/settings/_settings-layout": {
+      "filePath": "_authed/settings/_settings-layout.tsx",
+      "parent": "/_authed/settings",
+      "children": [
+        "/_authed/settings/_settings-layout/"
+      ]
+    },
     "/_authed/caregivers/": {
       "filePath": "_authed/caregivers/index.tsx",
       "parent": "/_authed"
+    },
+    "/_authed/daily-log/": {
+      "filePath": "_authed/daily-log/index.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/settings/_settings-layout/": {
+      "filePath": "_authed/settings/_settings-layout/index.tsx",
+      "parent": "/_authed/settings/_settings-layout"
     }
   }
 }

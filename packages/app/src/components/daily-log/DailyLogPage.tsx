@@ -7,7 +7,7 @@ import UpcomingTasksList from "./UpcomingTasksList";
 export default function DailyLog() {
   return (
     <div className="container mx-auto p-4">
-      <PageHeader title="Daily Log">
+      <PageHeader title={`Daily Log`}>
         <LogEventForm />
       </PageHeader>
 
@@ -16,10 +16,14 @@ export default function DailyLog() {
         <SummarySection />
       </div> */}
 
+      <p className="text-muted-foreground">{`${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}</p>
+
       <hr className="my-6" />
 
       <div className="grid grid-cols-4 gap-6">
-        <UpcomingTasksList />
+        <div className="col-span-1 space-y-6">
+          <UpcomingTasksList />
+        </div>
 
         <div className="col-span-3 space-y-6">
           <h2 className="font-semibold mb-4">Summary</h2>

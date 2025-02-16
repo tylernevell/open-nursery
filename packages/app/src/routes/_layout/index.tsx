@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Heart, Baby, Clock, BarChart3, Github } from 'lucide-react'
+import { Heart, Baby, Clock, BarChart3 } from "lucide-react";
 import { Button } from '~/components/ui/button'
 import { Card, CardContent } from '~/components/ui/card'
 
@@ -65,7 +65,7 @@ function LandingPage() {
             variant="outline"
             className="gap-2"
             onClick={() =>
-              window.open('https://github.com/kurtaking/opennursery')
+              window.open("https://github.com/kurtaking/open-nursery")
             }
           >
             <Github className="w-5 h-5" />
@@ -74,7 +74,7 @@ function LandingPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 const FeatureCard = ({

@@ -25,7 +25,7 @@ export default function UpcomingTasksList() {
       <div className="flex justify-between items-center">
         <h2 className="font-semibold mb-4">Upcoming Tasks</h2>
       </div>
-      <ScrollArea className="h-[700px] w-[350px] rounded-md border p-4">
+      <ScrollArea className="w-[350px] rounded-md border p-4">
         <div className="space-y-4">
           <TaskItem time="3:30 PM" label="Next Feeding" type="feeding" />
           <TaskItem time="4:00 PM" label="Nap Time" type="sleep" />
