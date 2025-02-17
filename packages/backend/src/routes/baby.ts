@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { babiesTable } from "~/schema/users";
+import { babiesTable } from "~/schema/personas-schema";
 import { nurseryDb } from "~/service";
 
 const app = new Hono();

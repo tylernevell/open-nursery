@@ -12,6 +12,7 @@ import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Link } from "@tanstack/react-router";
+import { userApi } from "~/lib/apis/userApi";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -52,10 +53,15 @@ const SignUpForm = () => {
     }
 
     try {
-      // Here we would typically call our signup API
       console.log("Form submitted:", formData);
-      // For demo purposes, simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const response = await userApi.createUser({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log(response);
 
       // Reset form after successful submission
       setFormData({

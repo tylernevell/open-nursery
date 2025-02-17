@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { babiesTable, babyToCaregiversTable } from "./schema/users";
+import { babiesTable, babyToCaregiversTable } from "./schema/personas-schema";
 
 config({ path: ".env" });
 
