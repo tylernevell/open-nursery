@@ -1,6 +1,6 @@
 import { relations, type InferInsertModel, type InferSelectModel } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { babiesTable, caregiversTable } from "./users";
+import { babiesTable, caregiversTable } from "./personas-schema";
 import * as t from "drizzle-orm/pg-core";
 
 /**

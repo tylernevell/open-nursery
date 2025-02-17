@@ -5,7 +5,7 @@ import {
   sleepEventsTable,
   feedingEventsTable,
   diaperEventsTable,
-} from "~/schema/events";
+} from "~/schema/events-schema";
 import { nurseryDb } from "~/service";
 
 const app = new Hono();

@@ -1,7 +1,6 @@
-// src/routes/caregiver.ts
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { caregiversTable } from "~/schema/users";
+import { caregiversTable } from "~/schema/personas-schema";
 import { nurseryDb, getBabiesByCaregiver } from "~/service";
 
 const app = new Hono();

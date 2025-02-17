@@ -1,25 +1,23 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AppSidebar } from "~/components/app-sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
-import { supabaseClient } from "~/lib/apis/supabaseClient";
+import { authClient } from "~/lib/apis/authClient";
 
 export const Route = createFileRoute("/_authed")({
-  // beforeLoad: async () => {
-  //   const {
-  //     data: { session },
-  //   } = await supabaseClient.auth.getSession();
+  beforeLoad: async () => {
+    const { data, error } = await authClient.getSession();
 
-  //   console.log({ session });
+    console.log({ where: "fe app", session: data?.session });
 
-  //   if (!session) {
-  //     throw redirect({
-  //       to: "/login",
-  //       search: {
-  //         redirect: window.location.pathname,
-  //       },
-  //     });
-  //   }
-  // },
+    if (error || !data.session) {
+      throw redirect({
+        to: "/login",
+        search: {
+          redirect: window.location.pathname,
+        },
+      });
+    }
+  },
   component: AuthedLayout,
 });
 

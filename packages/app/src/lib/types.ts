@@ -39,3 +39,9 @@ export interface BabyModel {
 }
 
 export type Baby = Omit<BabyModel, "id">
+
+export interface NewUser {
+  name: string;
+  email: string;
+  password: string;
+}

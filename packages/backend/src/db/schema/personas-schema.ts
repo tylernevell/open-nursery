@@ -1,6 +1,7 @@
 import { relations, type InferInsertModel, type InferSelectModel } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import * as t from "drizzle-orm/pg-core";
+import { user } from "./auth-schema";
 
 /**
  * Caregivers
@@ -9,13 +10,12 @@ export const caregiversTable = t.pgTable(
   "caregivers",
   {
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
-    fullName: t.varchar("full_name", { length: 256 }).notNull(),
+    userId: t.text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+    name: t.varchar("name", { length: 256 }).notNull(),
     email: t.varchar().notNull(),
     relationship: t
       .varchar("relationship", {
-        // todo: run migration with other enum dropped
-        // enum: ["mother", "father", "grandparent", "nanny", "parent", "guardian"],
-        enum: ["mother", "father", "grandparent", "nanny", "other"],
+        enum: ["parent"],
       })
       .notNull(),
     createdAt: t.timestamp("created_at").defaultNow().notNull(),

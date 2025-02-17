@@ -3,14 +3,14 @@ import {
   babiesTable,
   babyToCaregiversTable,
   caregiversTable,
-} from "./schema/users";
+} from "./schema/personas-schema";
 import { nurseryDb } from "./service";
 import {
   eventsTable,
   sleepEventsTable,
   feedingEventsTable,
   diaperEventsTable,
-} from "./schema/events";
+} from "./schema/events-schema";
 
 async function seedUsers() {
   const mockCaregivers: (typeof caregiversTable.$inferInsert)[] = [
