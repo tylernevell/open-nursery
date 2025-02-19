@@ -1,12 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import FeatureCarousel from "@/components/signed-out/feature-carousel";
-import { SignedOutNavigation } from "@/components/signed-out/navigation";
+import { createFileRoute } from '@tanstack/react-router'
+import { Github } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import FeatureCarousel from '@/components/signed-out/feature-carousel'
+import { SignedOutNavigation } from '@/components/signed-out/navigation'
 
-export const Route = createFileRoute("/_layout/")({
+export const Route = createFileRoute('/_layout/')({
   component: LandingPage,
-});
+})
 
 function LandingPage() {
   return (
@@ -71,7 +71,7 @@ function LandingPage() {
                 variant="outline"
                 className="gap-2 hover:bg-gray-100"
                 onClick={() =>
-                  window.open("https://github.com/kurtaking/open-nursery")
+                  window.open('https://github.com/kurtaking/open-nursery')
                 }
               >
                 <Github className="w-5 h-5" />
@@ -82,5 +82,5 @@ function LandingPage() {
         </section>
       </div>
     </div>
-  );
+  )
 }

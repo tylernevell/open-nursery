@@ -3,34 +3,6 @@ import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export const Route = createFileRoute("/_authed")({
-  beforeLoad: async () => {
-    // const { isPending } = authClient.useSession();
-
-    // console.log({
-    //   where: 'fe app - createFileRoute("/_authed")',
-    //   isPending,
-    // });
-
-    // if (isPending) {
-    //   return <div>Loading...</div>;
-    // }
-
-    console.log({
-      where: 'fe app - createFileRoute("/_authed")',
-      // session: data?.session,
-      // user: data?.user,
-      // error,
-    });
-
-    //   if (error || !data.session) {
-    //     throw redirect({
-    //       to: "/login",
-    //       search: {
-    //         redirect: window.location.pathname,
-    //       },
-    //     });
-    //   }
-  },
   component: AuthedLayout,
 });
 

@@ -1062,6 +1062,7 @@ __metadata:
     typescript: "npm:^5.7.3"
     vite: "npm:^6.1.0"
     vite-tsconfig-paths: "npm:^5.1.4"
+    web-vitals: "npm:^4.2.4"
     zod: "npm:^3.24.1"
   languageName: unknown
   linkType: soft
@@ -5436,6 +5437,13 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/e1cad1cfbd29923a37d2dbd60f7387901ed8356758073a0226cbe844fd032425ba3bf41651332cab4965d5c54d0b51d208889ff32ce81bd282d230c0c9f0f8f1
+  languageName: node
+  linkType: hard
+
+"web-vitals@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "web-vitals@npm:4.2.4"
+  checksum: 10c0/383c9281d5b556bcd190fde3c823aeb005bb8cf82e62c75b47beb411014a4ed13fa5c5e0489ed0f1b8d501cd66b0bebcb8624c1a75750bd5df13e2a3b1b2d194
   languageName: node
   linkType: hard
 

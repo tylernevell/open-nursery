@@ -9,8 +9,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import "@/styles/app.css";
 import { NavMain } from "./nav-main";
+
 const navMainItems = [
   {
     title: "Daily Log",

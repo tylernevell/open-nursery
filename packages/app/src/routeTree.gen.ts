@@ -15,9 +15,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as AuthedImport } from './routes/_authed'
-import { Route as LayoutIndexImport } from './routes/_layout/index'
-import { Route as LayoutSignUpImport } from './routes/_layout/sign-up'
-import { Route as LayoutLoginImport } from './routes/_layout/login'
+import { Route as LayoutIndexImport } from './routes/_layout.index'
+import { Route as LayoutSignUpImport } from './routes/_layout.sign-up'
+import { Route as LayoutLoginImport } from './routes/_layout.login'
 import { Route as AuthedDailyLogIndexImport } from './routes/_authed/daily-log/index'
 import { Route as AuthedCaregiversIndexImport } from './routes/_authed/caregivers/index'
 import { Route as AuthedSettingsSettingsLayoutImport } from './routes/_authed/settings/_settings-layout'
@@ -382,15 +382,15 @@ export const routeTree = rootRoute
       ]
     },
     "/_layout/login": {
-      "filePath": "_layout/login.tsx",
+      "filePath": "_layout.login.tsx",
       "parent": "/_layout"
     },
     "/_layout/sign-up": {
-      "filePath": "_layout/sign-up.tsx",
+      "filePath": "_layout.sign-up.tsx",
       "parent": "/_layout"
     },
     "/_layout/": {
-      "filePath": "_layout/index.tsx",
+      "filePath": "_layout.index.tsx",
       "parent": "/_layout"
     },
     "/_authed/caregivers/manage": {

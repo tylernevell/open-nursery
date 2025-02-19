@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Baby } from "lucide-react";
-import LoginForm from "@/components/signed-out/login-form";
+import { SignUpForm } from "@/components/signed-out/signup-form";
 
-export const Route = createFileRoute("/_layout/login")({
+export const Route = createFileRoute("/_layout/sign-up")({
   component: RouteComponent,
 });
 
@@ -16,7 +16,7 @@ function RouteComponent() {
           </div>
           OpenNursery
         </a>
-        <LoginForm />
+        <SignUpForm />
       </div>
     </div>
   );
