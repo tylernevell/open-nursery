@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import React, { useState } from "react";
+import { createFileRoute } from '@tanstack/react-router'
+import React, { useState } from 'react'
 import {
   Table,
   TableBody,
@@ -7,21 +7,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import PageHeader from "@/components/PageHeader";
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import PageHeader from '@/components/PageHeader'
 
-export const Route = createFileRoute("/_authed/daily-log/history")({
+export const Route = createFileRoute('/_authed/daily-log/history')({
   component: HistoricalDailyLogs,
-});
+})
 
 // Mock data
 const mockDailyLogs = [
   {
     id: 1,
     babyId: 1,
-    date: "2024-02-14",
+    date: '2024-02-14',
     feeding: {
       totalCount: 8,
       totalAmount: 720, // ml
@@ -41,26 +41,26 @@ const mockDailyLogs = [
     },
     events: [
       {
-        type: "feeding",
-        timestamp: "2024-02-14T06:00:00Z",
-        method: "breast",
+        type: 'feeding',
+        timestamp: '2024-02-14T06:00:00Z',
+        method: 'breast',
         duration: 20,
-        side: "left",
+        side: 'left',
       },
       {
-        type: "sleep",
-        timestamp: "2024-02-14T07:30:00Z",
+        type: 'sleep',
+        timestamp: '2024-02-14T07:30:00Z',
         duration: 120,
-        location: "crib",
+        location: 'crib',
       },
       // More events...
     ],
-    notes: "Good day overall. Started new bedtime routine.",
+    notes: 'Good day overall. Started new bedtime routine.',
   },
   {
     id: 2,
     babyId: 1,
-    date: "2024-02-13",
+    date: '2024-02-13',
     feeding: {
       totalCount: 7,
       totalAmount: 690,
@@ -81,30 +81,30 @@ const mockDailyLogs = [
     events: [
       // Events for this day...
     ],
-    notes: "Fussy during afternoon nap.",
+    notes: 'Fussy during afternoon nap.',
   },
-];
+]
 
 function formatDuration(minutes: number) {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours}h ${mins}m`;
+  const hours = Math.floor(minutes / 60)
+  const mins = minutes % 60
+  return `${hours}h ${mins}m`
 }
 
 function formatDiaperCounts(wet: number, dirty: number, both: number) {
-  return `${wet}W ${dirty}D ${both}B`;
+  return `${wet}W ${dirty}D ${both}B`
 }
 
 function HistoricalDailyLogs() {
-  const [expandedRows, setExpandedRows] = useState<number[]>([]);
+  const [expandedRows, setExpandedRows] = useState<number[]>([])
 
   const toggleRow = (rowId: number) => {
     setExpandedRows((prev) =>
       prev.includes(rowId)
         ? prev.filter((id) => id !== rowId)
         : [...prev, rowId],
-    );
-  };
+    )
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -156,7 +156,7 @@ function HistoricalDailyLogs() {
                   <TableCell>
                     <div>
                       <div>
-                        Total:{" "}
+                        Total:{' '}
                         {log.diapers.wetCount +
                           log.diapers.dirtyCount +
                           log.diapers.bothCount}
@@ -202,11 +202,11 @@ function HistoricalDailyLogs() {
                             </h4>
                             <ul className="space-y-1 text-sm">
                               <li>
-                                Total Sleep:{" "}
+                                Total Sleep:{' '}
                                 {formatDuration(log.sleep.totalDuration)}
                               </li>
                               <li>
-                                Longest Stretch:{" "}
+                                Longest Stretch:{' '}
                                 {formatDuration(log.sleep.longestStretch)}
                               </li>
                               <li>Number of Naps: {log.sleep.napCount}</li>
@@ -233,7 +233,7 @@ function HistoricalDailyLogs() {
         </Table>
       </div>
     </div>
-  );
+  )
 }
 
-export default HistoricalDailyLogs;
+export default HistoricalDailyLogs

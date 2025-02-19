@@ -1,4 +1,4 @@
-import { HelpingHand, LogsIcon, Settings2 } from "lucide-react";
+import { LogsIcon, Settings2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -25,25 +25,6 @@ const navMainItems = [
       {
         title: "History",
         url: "/daily-log/history",
-      },
-    ],
-  },
-  {
-    title: "Caregivers",
-    url: "#",
-    icon: HelpingHand,
-    items: [
-      {
-        title: "Overview",
-        url: "/caregivers",
-      },
-      // {
-      //   title: "Schedule",
-      //   url: "/caregivers/schedule",
-      // },
-      {
-        title: "Manage",
-        url: "/caregivers/manage",
       },
     ],
   },

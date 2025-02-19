@@ -6,7 +6,7 @@ import { APIError } from "better-auth/api";
 
 const app = new Hono();
 
-app.post("/signup", async (c) => {
+app.post("/sign-up", async (c) => {
   const body = await c.req.json();
 
   try {

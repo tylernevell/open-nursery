@@ -13,7 +13,7 @@ export async function fetchApi<T>(
         "Content-Type": "application/json",
         ...options.headers,
       },
-      // credentials: 'include',
+      credentials: 'include',
     });
     const data = await response.json();
     return response.ok ? { data, error: null } : { data: null, error: data };
