@@ -7,10 +7,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
-import { Button } from "~/components/ui/button";
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import PageHeader from "~/components/PageHeader";
+import PageHeader from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_authed/daily-log/history")({
   component: HistoricalDailyLogs,

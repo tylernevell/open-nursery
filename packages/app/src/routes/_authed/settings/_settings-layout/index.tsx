@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ProfileForm } from "~/components/settings/profile-form";
-import { Separator } from "~/components/ui/separator";
+import { ProfileForm } from "@/components/settings/profile-form";
+import { Separator } from "@/components/ui/separator";
 
 export const Route = createFileRoute("/_authed/settings/_settings-layout/")({
   component: SettingsOverview,

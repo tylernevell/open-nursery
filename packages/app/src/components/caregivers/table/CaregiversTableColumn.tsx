@@ -4,12 +4,11 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "~/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Button } from "~/components/ui/button";
-import { Caregiver } from "~/lib/types";
+import { Button } from "@/components/ui/button";
+import { Caregiver } from "@/lib/types";
 
 export const columns: ColumnDef<Caregiver>[] = [
   {

@@ -6,13 +6,13 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "~/components/ui/card";
-import { Label } from "~/components/ui/label";
-import { Input } from "~/components/ui/input";
-import { Button } from "~/components/ui/button";
-import { Alert, AlertDescription } from "~/components/ui/alert";
-import { Link } from "@tanstack/react-router";
-import { userApi } from "~/lib/apis/userApi";
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { userApi } from "@/lib/apis/userApi";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -23,8 +23,9 @@ const SignUpForm = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -34,7 +35,7 @@ const SignUpForm = () => {
     if (error) setError("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -55,14 +56,13 @@ const SignUpForm = () => {
     try {
       console.log("Form submitted:", formData);
 
-      const response = await userApi.createUser({
+      const response = await userApi.signUp({
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
 
       console.log(response);
-
       // Reset form after successful submission
       setFormData({
         name: "",
@@ -70,6 +70,8 @@ const SignUpForm = () => {
         password: "",
         confirmPassword: "",
       });
+
+      navigate({ to: "/daily-log" });
     } catch (err) {
       setError("Failed to create account. Please try again.");
     } finally {

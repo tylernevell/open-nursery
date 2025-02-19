@@ -14,7 +14,7 @@ export function TimelineEntry({
   type,
   details,
   icon: Icon,
-}: TimelineEntryProps) {
+}: Readonly<TimelineEntryProps>) {
   return (
     <Card className="mb-4">
       <CardContent className="p-4">

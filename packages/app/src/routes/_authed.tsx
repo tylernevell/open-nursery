@@ -1,22 +1,37 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { AppSidebar } from "~/components/app-sidebar/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
-import { authClient } from "~/lib/apis/authClient";
+import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/apis/authClient";
+import { userApi } from "@/lib/apis/userApi";
 
 export const Route = createFileRoute("/_authed")({
   beforeLoad: async () => {
-    const { data, error } = await authClient.getSession();
+    // const { isPending } = authClient.useSession();
 
-    console.log({ where: "fe app", session: data?.session });
+    // console.log({
+    //   where: 'fe app - createFileRoute("/_authed")',
+    //   isPending,
+    // });
 
-    if (error || !data.session) {
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: window.location.pathname,
-        },
-      });
-    }
+    // if (isPending) {
+    //   return <div>Loading...</div>;
+    // }
+
+    console.log({
+      where: 'fe app - createFileRoute("/_authed")',
+      // session: data?.session,
+      // user: data?.user,
+      // error,
+    });
+
+    //   if (error || !data.session) {
+    //     throw redirect({
+    //       to: "/login",
+    //       search: {
+    //         redirect: window.location.pathname,
+    //       },
+    //     });
+    //   }
   },
   component: AuthedLayout,
 });

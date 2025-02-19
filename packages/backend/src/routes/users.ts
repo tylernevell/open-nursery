@@ -56,8 +56,13 @@ app.post("/login", async (c) => {
         email: body.email,
         password: body.password
       },
-      asResponse: true
+      asResponse: true,
+      fetchOptions: {
+        redirect: "/daily-log"
+      }
     });
+
+    console.log("Login response", response);
 
     return response;
   } catch (error) {
@@ -96,6 +101,17 @@ app.post("/logout", async (c) => {
       error: "Failed to logout"
     }, 500);
   }
+});
+
+app.get("/session", async (c) => {
+  const session = await auth.api.getSession({
+    headers: c.req.raw.headers,
+    asResponse: true,
+  });
+
+  console.log("/GET Session", session);
+
+  return session;
 });
 
 export default app;

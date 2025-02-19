@@ -4,20 +4,20 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "~/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
 import { Link } from "@tanstack/react-router";
 
 export function SignedOutNavigation() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <Link to="/">
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Home
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link to="/sign-up">
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>

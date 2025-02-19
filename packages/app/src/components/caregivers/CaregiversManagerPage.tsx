@@ -1,4 +1,4 @@
-import { useCaregiversList, useCreateCaregiver } from "~/hooks/use-caregivers";
+import { useCaregiversList } from "@/hooks/use-caregivers";
 import CaregiverForm from "./form/CaregiverForm";
 import { CaregiversTable } from "./table/CaregiversTable";
 import { columns } from "./table/CaregiversTableColumn";

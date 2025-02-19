@@ -45,3 +45,9 @@ export interface NewUser {
   email: string;
   password: string;
 }
+
+export interface SignInUser {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}

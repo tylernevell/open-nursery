@@ -1,41 +1,44 @@
-import { ApiResponse, NewUser } from "../types";
-
-export async function fetchApi<T>(
-  endpoint: string,
-  options: RequestInit = {},
-): Promise<ApiResponse<T>> {
-  const API_URL = 'http://localhost:3000/api';
-
-  try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-    });
-    const data = await response.json();
-    return response.ok ? { data, error: null } : { data: null, error: data };
-  } catch (error) {
-    return {
-      data: null,
-      error: {
-        message: error instanceof Error ? error.message : "Unknown error occurred",
-      },
-    };
-  }
-}
+import { NewUser, SignInUser } from "../types";
+import { fetchApi } from "./helpers";
 
 type CreateUserResponse = {
   user: NewUser;
 }
 
+type SignInUserResponse = {
+  user: SignInUser;
+}
+
+const baseUrl = '/auth'
+
 export const userApi = {
-  createUser: (user: NewUser) => {
-    return fetchApi<CreateUserResponse>('/signup', {
+  signUp: (user: NewUser) => {
+    return fetchApi<CreateUserResponse>(`${baseUrl}/signup`, {
       method: 'POST',
       body: JSON.stringify(user),
-      credentials: 'include',
     });
   },
+
+  signIn: async (user: SignInUser) => {
+    const result = await fetchApi<SignInUserResponse>(`${baseUrl}/login`, {
+      method: 'POST',
+      body: JSON.stringify(user),
+    });
+
+    console.log("Sign in result", result);
+
+    return result;
+  },
+
+  signOut: () => {
+    return fetchApi(`${baseUrl}/logout`, {
+      method: 'POST',
+    });
+  },
+
+  getSession: () => {
+    return fetchApi(`${baseUrl}/session`, {
+      method: 'GET',
+    });
+  }
 }

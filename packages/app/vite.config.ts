@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [tailwindcss(), tsconfigPaths(), TanStackRouterVite({}), react()],
   resolve: {
     alias: {
-      "~": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 });

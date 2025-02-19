@@ -1,5 +1,5 @@
-import { cn } from "~/lib/utils";
-import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import { Link, useLocation } from "@tanstack/react-router";
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {

@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { SidebarNav } from "~/components/settings/side-navbar";
-import { Separator } from "~/components/ui/separator";
+import { SidebarNav } from "@/components/settings/side-navbar";
+import { Separator } from "@/components/ui/separator";
 
 export const Route = createFileRoute("/_authed/settings/_settings-layout")({
   component: SettingsLayout,

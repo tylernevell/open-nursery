@@ -1,5 +1,5 @@
-import { useCaregiversList } from "~/hooks/use-caregivers";
-import PageHeader from "../PageHeader";
+import { useCaregiversList } from "@/hooks/use-caregivers";
+import PageHeader from "@/components/PageHeader";
 
 export default function CaregiversOverviewPage() {
   const { data: caregivers, isLoading, error } = useCaregiversList();
@@ -12,7 +12,6 @@ export default function CaregiversOverviewPage() {
   return (
     <div className="container mx-auto p-4">
       <PageHeader title="Overview" />
-
       <hr className="my-6" />
     </div>
   );

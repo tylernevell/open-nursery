@@ -11,8 +11,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
-import { Caregiver } from "~/lib/types";
+} from "@/components/ui/table";
+import { Caregiver } from "@/lib/types";
 
 interface CaregiversTableProps {
   columns: ColumnDef<Caregiver>[];

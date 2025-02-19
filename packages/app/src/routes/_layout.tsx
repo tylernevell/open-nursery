@@ -1,5 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { SignedOutNavigation } from "~/components/signed-out/SignedOutNavigation";
+import { SignedOutNavigation } from "@/components/signed-out/SignedOutNavigation";
+import { AuthProvider } from "@/lib/auth/AuthContext";
 
 export const Route = createFileRoute("/_layout")({
   component: SignedOutLayout,
@@ -7,11 +8,13 @@ export const Route = createFileRoute("/_layout")({
 
 function SignedOutLayout() {
   return (
-    <div className="container mx-auto">
-      <div className="py-4">
-        <SignedOutNavigation />
+    <AuthProvider>
+      <div className="">
+        {/* <div className="py-4">
+          <SignedOutNavigation />
+        </div> */}
+        <Outlet />
       </div>
-      <Outlet />
-    </div>
+    </AuthProvider>
   );
 }

@@ -1,11 +1,10 @@
-import { Card, CardContent } from "../ui/card";
-
+import { Card, CardContent } from "@/components/ui/card";
 interface SummaryPanelProps {
   title: string;
   items: Array<{ label: string; value: string }>;
 }
 
-export function SummaryPanel({ title, items }: SummaryPanelProps) {
+export function SummaryPanel({ title, items }: Readonly<SummaryPanelProps>) {
   return (
     <Card>
       <CardContent className="p-4">
