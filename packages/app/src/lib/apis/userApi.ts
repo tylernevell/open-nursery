@@ -13,6 +13,7 @@ const baseUrl = '/auth'
 
 export const userApi = {
   signUp: (user: NewUser) => {
+    console.log("Signing up", user);
     return fetchApi<CreateUserResponse>(`${baseUrl}/sign-up`, {
       method: 'POST',
       body: JSON.stringify(user),
