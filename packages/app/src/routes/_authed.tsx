@@ -1,8 +1,6 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { authClient } from "@/lib/apis/authClient";
-import { userApi } from "@/lib/apis/userApi";
 
 export const Route = createFileRoute("/_authed")({
   beforeLoad: async () => {

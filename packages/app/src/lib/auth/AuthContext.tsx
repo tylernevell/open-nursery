@@ -1,11 +1,11 @@
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { authClient } from "@/lib/apis/authClient";
 
 export const AuthContext = createContext<ReturnType<
   typeof authClient.useSession
 > | null>(null);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
   const session = authClient.useSession();
 
   return (

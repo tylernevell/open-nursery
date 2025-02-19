@@ -29,9 +29,7 @@ export const columns: ColumnDef<Caregiver>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const caregiver = row.original;
-
+    cell: () => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

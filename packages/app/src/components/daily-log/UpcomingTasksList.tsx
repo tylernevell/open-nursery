@@ -6,7 +6,7 @@ interface TaskItemProps {
   type: string;
 }
 
-function TaskItem({ time, label, type }: Readonly<TaskItemProps>) {
+function TaskItem({ time, label, type: _type }: Readonly<TaskItemProps>) {
   return (
     <div className="flex items-center justify-between border-b border-border pb-2 last:border-0 last:pb-0">
       <div className="flex items-center gap-2">
