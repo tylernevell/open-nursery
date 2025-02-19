@@ -1,4 +1,4 @@
-import { NewUser, SignInUser } from "../types";
+import type { NewUser, SignInUser } from "../types";
 import { fetchApi } from "./helpers";
 
 type CreateUserResponse = {

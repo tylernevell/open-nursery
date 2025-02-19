@@ -1,4 +1,4 @@
-import { BabyModel, Caregiver, NewCaregiver } from "../types";
+import type { BabyModel, Caregiver, NewCaregiver } from "../types";
 import { fetchApi } from "./helpers";
 
 /**

@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { caregiverApi } from "@/lib/apis/caregiverApi";
-import { NewCaregiver } from "@/lib/types";
+import type { NewCaregiver } from "@/lib/types";
 
 export function useCaregiversList() {
   return useQuery({

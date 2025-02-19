@@ -1,5 +1,5 @@
 import {
-  ColumnDef,
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Caregiver } from "@/lib/types";
+import type { Caregiver } from "@/lib/types";
 
 interface CaregiversTableProps {
   columns: ColumnDef<Caregiver>[];

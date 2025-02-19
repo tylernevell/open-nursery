@@ -3930,7 +3930,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:>=6":
+"husky@npm:^9.1.7":
   version: 9.1.7
   resolution: "husky@npm:9.1.7"
   bin:
@@ -4568,7 +4568,7 @@ __metadata:
   dependencies:
     "@types/node": "npm:^20.11.17"
     drizzle-kit: "npm:^0.30.4"
-    husky: "npm:>=6"
+    husky: "npm:^9.1.7"
     lint-staged: "npm:>=10"
     prettier: "npm:^3.5.0"
     tsx: "npm:^4.19.2"

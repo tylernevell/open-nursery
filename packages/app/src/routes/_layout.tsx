@@ -1,5 +1,4 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { SignedOutNavigation } from "@/components/signed-out/SignedOutNavigation";
 import { AuthProvider } from "@/lib/auth/AuthContext";
 
 export const Route = createFileRoute("/_layout")({
