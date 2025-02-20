@@ -9,11 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { userApi } from "@/lib/apis/userApi";
+import { useAuth } from "@/context/AuthContext";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -34,9 +34,16 @@ function LoginForm({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (user: LoginFormValues) => {
-    const response = await userApi.signIn(user);
-    console.log(user, response);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (credentials: LoginFormValues) => {
+    try {
+      await signIn(credentials);
+      navigate({ to: "/" });
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (

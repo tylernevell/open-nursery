@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { userApi } from "@/lib/apis/userApi";
+import { toast } from "sonner";
 
 const signUpSchema = z.object({
   name: z.string().min(1, "Name is required").nonempty("Name is required"),
@@ -33,6 +34,7 @@ export function SignUpForm({
   className,
   ...props
 }: Readonly<React.ComponentPropsWithoutRef<"div">>) {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -42,8 +44,23 @@ export function SignUpForm({
   });
 
   const onSubmit = async (user: SignUpFormValues) => {
-    const response = await userApi.signUp(user);
-    console.log(user, response);
+    try {
+      await userApi.signUp(user);
+
+      toast.success("Account created! You may now log in.", {
+        duration: 3000,
+        dismissible: true,
+        icon: "👋",
+      });
+
+      // Add a small delay before redirecting to show the toast
+      setTimeout(() => {
+        navigate({ to: "/login" });
+      }, 1000);
+    } catch (error) {
+      console.error("Signup failed:", error);
+      toast.error("Failed to create account. Please try again.");
+    }
   };
 
   return (

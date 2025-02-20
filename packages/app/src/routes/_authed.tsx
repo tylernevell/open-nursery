@@ -1,18 +1,31 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
+import { Outlet, createFileRoute, Navigate } from "@tanstack/react-router";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { useAuth } from "@/context/AuthContext";
+import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
+import { Toaster } from "sonner";
 
 export const Route = createFileRoute("/_authed")({
   component: AuthedLayout,
 });
 
-export default function AuthedLayout() {
+function AuthedLayout() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or your loading component
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />
       <main className="ml-2 mt-2">
         <SidebarTrigger />
         <Outlet />
+        <Toaster />
       </main>
     </SidebarProvider>
   );
