@@ -1,5 +1,10 @@
 import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { type InferInsertModel, type InferSelectModel } from "drizzle-orm";
 
+/**
+ * Users table
+ */
 export const user = pgTable("user", {
 	id: text("id").primaryKey(),
 	name: text('name').notNull(),
@@ -10,6 +15,9 @@ export const user = pgTable("user", {
 	updatedAt: timestamp('updated_at').notNull()
 });
 
+/**
+ * Sessions table
+ */
 export const session = pgTable("session", {
 	id: text("id").primaryKey(),
 	expiresAt: timestamp('expires_at').notNull(),
@@ -21,6 +29,9 @@ export const session = pgTable("session", {
 	userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' })
 });
 
+/**
+ * Accounts table
+ */
 export const account = pgTable("account", {
 	id: text("id").primaryKey(),
 	accountId: text('account_id').notNull(),
@@ -37,6 +48,9 @@ export const account = pgTable("account", {
 	updatedAt: timestamp('updated_at').notNull()
 });
 
+/**
+ * Verifications table
+ */
 export const verification = pgTable("verification", {
 	id: text("id").primaryKey(),
 	identifier: text('identifier').notNull(),
@@ -45,3 +59,17 @@ export const verification = pgTable("verification", {
 	createdAt: timestamp('created_at'),
 	updatedAt: timestamp('updated_at')
 });
+
+/**
+ * User Schema
+ */
+export const insertUserSchema = createInsertSchema(user);
+export const selectUserSchema = createSelectSchema(user);
+export type UserModel = InferSelectModel<typeof user>;
+export type NewUserModel = InferInsertModel<typeof user>;
+
+/**
+ * Session Schema
+ */
+export const selectSessionSchema = createSelectSchema(session);
+export type SessionModel = InferSelectModel<typeof session>;

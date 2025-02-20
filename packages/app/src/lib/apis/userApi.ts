@@ -9,6 +9,17 @@ type SignInUserResponse = {
   user: SignInUser;
 }
 
+type SessionModel = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  userId: string;
+  expiresAt: Date;
+  token: string;
+  ipAddress: string | null;
+  userAgent: string | null;
+}
+
 const baseUrl = '/auth'
 
 export const userApi = {
@@ -32,13 +43,13 @@ export const userApi = {
   },
 
   signOut: () => {
-    return fetchApi(`${baseUrl}/logout`, {
+    return fetchApi<void>(`${baseUrl}/logout`, {
       method: 'POST',
     });
   },
 
   getSession: () => {
-    return fetchApi(`${baseUrl}/session`, {
+    return fetchApi<SessionModel>(`${baseUrl}/session`, {
       method: 'GET',
     });
   }

@@ -38,6 +38,15 @@ export const babiesTable = t.pgTable("babies", {
   dateOfBirth: t.timestamp("date_of_birth").notNull(),
   birthWeight: t.integer("birth_weight"), // in grams
   birthLength: t.integer("birth_length"), // in millimeters
+  gender: t.varchar("gender", {
+    enum: ["male", "female", "other"]
+  }),
+  notes: t.text("notes"),
+  currentWeight: t.integer("current_weight"), // in grams
+  currentLength: t.integer("current_length"), // in millimeters
+  status: t.varchar("status", {
+    enum: ["active", "archived"]
+  }).default("active").notNull(),
   createdAt: t.timestamp("created_at").defaultNow().notNull(),
   updatedAt: t.timestamp("updated_at").defaultNow().notNull(),
 }).enableRLS();

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { caregiversTable } from "~/schema/personas-schema";
-import { nurseryDb, getBabiesByCaregiver } from "~/service";
+import { babiesTable, babyToCaregiversTable, caregiversTable } from "~/schema/personas-schema";
+import { nurseryDb } from "~/service";
 
 const app = new Hono();
 
@@ -55,7 +55,15 @@ app.delete("/:id", async (c) => {
 // Get babies for caregiver
 app.get("/:id/babies", async (c) => {
   const id = Number(c.req.param("id"));
-  const results = await getBabiesByCaregiver(id);
+
+  const results = await nurseryDb
+    .select({
+      baby: babiesTable,
+      role: babyToCaregiversTable.role,
+    })
+    .from(babyToCaregiversTable)
+    .where(eq(babyToCaregiversTable.caregiverId, id))
+    .innerJoin(babiesTable, eq(babiesTable.id, babyToCaregiversTable.babyId));
   return c.json({ babies: results });
 });
 

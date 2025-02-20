@@ -20,8 +20,7 @@ export function AuthProvider({
   useEffect(() => {
     const initAuth = async () => {
       try {
-        const session = await userApi.getSession();
-        setUser(session.data?.user ?? null);
+        setUser(null);
       } catch (error) {
         setUser(null);
       } finally {

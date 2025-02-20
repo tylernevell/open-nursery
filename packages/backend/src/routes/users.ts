@@ -1,8 +1,10 @@
 import { Hono } from "hono";
 import { auth } from "../lib/auth";
-import { caregiversTable } from "~/schema/personas-schema";
+import { caregiversTable, insertCaregiverSchema, selectBabySchema } from "~/schema/personas-schema";
 import { nurseryDb } from "~/service";
 import { APIError } from "better-auth/api";
+import { zValidator } from "@hono/zod-validator";
+import { selectSessionSchema, selectUserSchema } from "~/schema/auth-schema";
 
 const app = new Hono();
 
@@ -57,9 +59,6 @@ app.post("/login", async (c) => {
         password: body.password
       },
       asResponse: true,
-      fetchOptions: {
-        redirect: "/daily-log"
-      }
     });
 
     console.log("Login response", response);
@@ -103,15 +102,22 @@ app.post("/logout", async (c) => {
   }
 });
 
-app.get("/session", async (c) => {
-  const session = await auth.api.getSession({
+app.get("/session", zValidator('json', selectSessionSchema), async (c) => {
+  const response = await auth.api.getSession({
     headers: c.req.raw.headers,
-    asResponse: true,
   });
 
-  console.log("/GET Session", session);
+  if (!response?.session) {
+    return c.json({
+      error: "No session found"
+    }, 401);
+  }
 
-  return session;
+  return c.json({
+    data: {
+      session: response.session
+    }
+  });
 });
 
 export default app;

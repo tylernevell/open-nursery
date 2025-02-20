@@ -1,8 +1,9 @@
 import { config } from "dotenv";
-import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { babiesTable, babyToCaregiversTable } from "./schema/personas-schema";
+import * as authSchema from "./schema/auth-schema";
+import * as personasSchema from "./schema/personas-schema";
+import * as eventsSchema from "./schema/events-schema";
 
 config({ path: ".env" });
 
@@ -13,15 +14,4 @@ if (!url) {
 }
 
 const client = postgres(url);
-export const nurseryDb = drizzle({ client });
-
-export async function getBabiesByCaregiver(caregiverId: number) {
-  return nurseryDb
-    .select({
-      baby: babiesTable,
-      role: babyToCaregiversTable.role,
-    })
-    .from(babyToCaregiversTable)
-    .where(eq(babyToCaregiversTable.caregiverId, caregiverId))
-    .innerJoin(babiesTable, eq(babiesTable.id, babyToCaregiversTable.babyId));
-}
+export const nurseryDb = drizzle({ client, schema: { ...authSchema, ...personasSchema, ...eventsSchema } });
