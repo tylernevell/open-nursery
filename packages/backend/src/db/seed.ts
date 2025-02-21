@@ -15,18 +15,20 @@ import {
 async function seedUsers() {
   const mockCaregivers: (typeof caregiversTable.$inferInsert)[] = [
     {
-      fullName: "kurt king",
+      name: "kurt king",
       email: "kurt@example.com",
-      relationship: "father",
+      relationship: "parent",
       createdAt: new Date(),
       updatedAt: new Date(),
+      userId: "1",
     },
     {
-      fullName: "christina king",
+      name: "christina king",
       email: "christina@example.com",
-      relationship: "mother",
+      relationship: "parent",
       createdAt: new Date(),
       updatedAt: new Date(),
+      userId: ""
     },
   ];
 

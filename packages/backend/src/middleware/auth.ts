@@ -1,6 +1,6 @@
 import { type MiddlewareHandler } from "hono";
 import { auth } from "src/lib/auth";
-import { type ApiResponse } from "~/schema/personas-schema";
+import type { ApiResponse } from "src/lib/types";
 
 export const setSession: MiddlewareHandler = async (c, next) => {
   const session = await auth.api.getSession({ headers: c.req.raw.headers });

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "yarn workspaces foreach -A --include @internal/app --include @internal/backend --parallel --jobs unlimited -v -i run dev",
+    "tsc": "yarn workspaces foreach -A --parallel --jobs unlimited -v -i run tsc",
     "format": "prettier . --write",
     "postinstall": "husky install"
   },
@@ -17,7 +18,8 @@
     "husky": ">=6",
     "lint-staged": ">=10",
     "prettier": "^3.5.0",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   },
   "workspaces": [
     "./packages/*"

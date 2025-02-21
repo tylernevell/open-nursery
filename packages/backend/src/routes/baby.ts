@@ -5,13 +5,12 @@ import {
   babiesTable,
   babyToCaregiversTable,
   insertBabySchema,
-  type ApiResponse,
   type Baby,
   type BabyWithCaregivers
 } from "~/schema/personas-schema";
 import { nurseryDb } from "~/service";
 import { auth } from "src/lib/auth";
-
+import type { ApiResponse } from "src/lib/types";
 const app = new Hono<{
   Variables: {
     user: typeof auth.$Infer.Session.user | null;
