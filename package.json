@@ -12,13 +12,15 @@
     "format": "biome format --write packages/*",
     "lint": "biome lint --write packages/*",
     "check": "biome check --write packages/*",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.30.4",
-    "husky": ">=6",
+    "husky": "^9.1.7",
     "lint-staged": ">=10",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
@@ -28,6 +30,6 @@
   ],
   "packageManager": "yarn@4.6.0",
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "biome check"
+    "*.{js,ts,jsx,tsx}": "yarn check"
   }
 }
