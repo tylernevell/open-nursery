@@ -9,15 +9,17 @@
   "scripts": {
     "dev": "yarn workspaces foreach -A --include @internal/app --include @internal/backend --parallel --jobs unlimited -v -i run dev",
     "tsc": "yarn workspaces foreach -A --parallel --jobs unlimited -v -i run tsc",
-    "format": "prettier . --write",
+    "format": "biome format --write packages/*",
+    "lint": "biome lint --write packages/*",
+    "check": "biome check --write packages/*",
     "postinstall": "husky install"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.30.4",
     "husky": ">=6",
     "lint-staged": ">=10",
-    "prettier": "^3.5.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
@@ -26,6 +28,6 @@
   ],
   "packageManager": "yarn@4.6.0",
   "lint-staged": {
-    "*.--write": "prettier --write"
+    "*.{js,ts,jsx,tsx}": "biome check"
   }
 }

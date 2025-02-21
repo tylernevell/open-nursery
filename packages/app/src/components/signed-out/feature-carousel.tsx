@@ -1,36 +1,28 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Baby, Clock, BarChart3, Heart } from "lucide-react";
-import { type ReactNode } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Card, CardContent } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Baby, BarChart3, Clock, Heart } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 const features = [
   {
     icon: <Baby className="w-12 h-12 text-blue-600" />,
-    title: "Complete Tracking",
-    description:
-      "Track feedings, diapers, sleep, and growth milestones in one place",
+    title: 'Complete Tracking',
+    description: 'Track feedings, diapers, sleep, and growth milestones in one place',
   },
   {
     icon: <Clock className="w-12 h-12 text-blue-600" />,
-    title: "Real-time Updates",
-    description: "Sync instantly across all caregivers and devices",
+    title: 'Real-time Updates',
+    description: 'Sync instantly across all caregivers and devices',
   },
   {
     icon: <BarChart3 className="w-12 h-12 text-blue-600" />,
-    title: "Insightful Trends",
-    description: "Visualize patterns and track development over time",
+    title: 'Insightful Trends',
+    description: 'Visualize patterns and track development over time',
   },
   {
     icon: <Heart className="w-12 h-12 text-blue-600" />,
-    title: "Forever Free",
-    description:
-      "No premium features, no subscriptions, just pure parental support",
+    title: 'Forever Free',
+    description: 'No premium features, no subscriptions, just pure parental support',
   },
 ];
 
@@ -54,17 +46,14 @@ export default function FeatureCarousel() {
   return (
     <Carousel
       opts={{
-        align: "start",
+        align: 'start',
         loop: true,
       }}
       className="w-full max-w-sm md:max-w-4xl mx-auto"
     >
       <CarouselContent>
         {features.map((feature) => (
-          <CarouselItem
-            key={feature.title}
-            className="md:basis-1/2 lg:basis-1/3"
-          >
+          <CarouselItem key={feature.title} className="md:basis-1/2 lg:basis-1/3">
             <FeatureCard {...feature} />
           </CarouselItem>
         ))}

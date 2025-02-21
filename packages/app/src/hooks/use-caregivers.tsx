@@ -1,10 +1,10 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { caregiverApi } from "@/lib/apis/caregiverApi";
-import type { NewCaregiver } from "@/lib/types";
+import { caregiverApi } from '@/lib/apis/caregiverApi';
+import type { NewCaregiver } from '@/lib/types';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export function useCaregiversList() {
   return useQuery({
-    queryKey: ["caregivers"],
+    queryKey: ['caregivers'],
     queryFn: async () => {
       const result = await caregiverApi.getCaregivers();
       if (result.error) throw new Error(result.error.message);
@@ -15,7 +15,7 @@ export function useCaregiversList() {
 
 export function useCaregiverDetails(id: number) {
   return useQuery({
-    queryKey: ["caregiver", id],
+    queryKey: ['caregiver', id],
     queryFn: async () => {
       const result = await caregiverApi.getCaregiver(id);
       if (result.error) throw new Error(result.error.message);

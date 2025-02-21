@@ -1,5 +1,5 @@
-import type { BabyModel, Caregiver, NewCaregiver } from "../types";
-import { fetchApi } from "./helpers";
+import type { BabyModel, Caregiver, NewCaregiver } from '../types';
+import { fetchApi } from './helpers';
 
 /**
  * Response types

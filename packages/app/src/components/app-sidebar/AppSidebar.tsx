@@ -1,4 +1,3 @@
-import { LogOut, LogsIcon, Settings2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -8,26 +7,27 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { NavMain } from "./nav-main";
-import { useAuth } from "@/context/AuthContext";
-import { useNavigate } from "@tanstack/react-router";
-import { toast } from "sonner";
+} from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
+import { useNavigate } from '@tanstack/react-router';
+import { LogOut, LogsIcon, Settings2 } from 'lucide-react';
+import { toast } from 'sonner';
+import { NavMain } from './nav-main';
 
 const navMainItems = [
   {
-    title: "Daily Log",
-    url: "#",
+    title: 'Daily Log',
+    url: '#',
     icon: LogsIcon,
     isActive: true,
     items: [
       {
-        title: "Dashboard",
-        url: "/daily-log",
+        title: 'Dashboard',
+        url: '/daily-log',
       },
       {
-        title: "History",
-        url: "/daily-log/history",
+        title: 'History',
+        url: '/daily-log/history',
       },
     ],
   },
@@ -35,8 +35,8 @@ const navMainItems = [
 
 const sidebarMenuItems = [
   {
-    title: "Settings",
-    url: "/settings",
+    title: 'Settings',
+    url: '/settings',
     icon: Settings2,
   },
 ];
@@ -48,10 +48,10 @@ export function AppSidebar() {
   const handleSignOut = async () => {
     try {
       await signOut();
-      toast.success("Signed out successfully");
-      navigate({ to: "/login" });
+      toast.success('Signed out successfully');
+      navigate({ to: '/login' });
     } catch (error) {
-      toast.error("Failed to sign out");
+      toast.error('Failed to sign out');
     }
   };
 

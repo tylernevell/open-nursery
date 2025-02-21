@@ -1,10 +1,10 @@
-import { Outlet, createFileRoute, Navigate } from "@tanstack/react-router";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { useAuth } from "@/context/AuthContext";
-import { AppSidebar } from "@/components/app-sidebar/AppSidebar";
-import { Toaster } from "sonner";
+import { AppSidebar } from '@/components/app-sidebar/AppSidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
+import { Navigate, Outlet, createFileRoute } from '@tanstack/react-router';
+import { Toaster } from 'sonner';
 
-export const Route = createFileRoute("/_authed")({
+export const Route = createFileRoute('/_authed')({
   component: AuthedLayout,
 });
 

@@ -1,6 +1,6 @@
-import { userApi } from "@/lib/apis/userApi";
-import type { SignInUser } from "@/lib/types";
-import { createContext, useContext, useEffect, useState } from "react";
+import { userApi } from '@/lib/apis/userApi';
+import type { SignInUser } from '@/lib/types';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
   user: SignInUser | null;
@@ -11,16 +11,15 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [user, setUser] = useState<SignInUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
       try {
-        setUser(null);
+        const session = await userApi.getSession();
+        setUser(session.data?.user ?? null);
       } catch (error) {
         setUser(null);
       } finally {
@@ -41,17 +40,13 @@ export function AuthProvider({
     setUser(null);
   };
 
-  return (
-    <AuthContext.Provider value={{ user, isLoading, signIn, signOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, isLoading, signIn, signOut }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 }

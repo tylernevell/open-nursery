@@ -1,13 +1,13 @@
-import { LogEventForm } from "./LogEventForm";
-import PageHeader from "../PageHeader";
-import SummarySection from "./SummaryPanel";
-import Timeline from "./Timeline";
-import UpcomingTasksList from "./UpcomingTasksList";
+import PageHeader from '../PageHeader';
+import { LogEventForm } from './LogEventForm';
+import SummarySection from './SummaryPanel';
+import Timeline from './Timeline';
+import UpcomingTasksList from './UpcomingTasksList';
 
 export default function DailyLog() {
   return (
     <div className="container mx-auto p-4">
-      <PageHeader title={`Daily Log`}>
+      <PageHeader title="Daily Log">
         <LogEventForm />
       </PageHeader>
 
@@ -16,7 +16,7 @@ export default function DailyLog() {
         <SummarySection />
       </div> */}
 
-      <p className="text-muted-foreground">{`${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}</p>
+      <p className="text-muted-foreground">{`${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}</p>
 
       <hr className="my-6" />
 

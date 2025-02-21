@@ -1,13 +1,13 @@
-import type { NewUser, SignInUser } from "../types";
-import { fetchApi } from "./helpers";
+import type { NewUser, SignInUser } from '../types';
+import { fetchApi } from './helpers';
 
 type CreateUserResponse = {
   user: NewUser;
-}
+};
 
 type SignInUserResponse = {
   user: SignInUser;
-}
+};
 
 type SessionModel = {
   id: string;
@@ -18,13 +18,18 @@ type SessionModel = {
   token: string;
   ipAddress: string | null;
   userAgent: string | null;
-}
+};
 
-const baseUrl = '/auth'
+type SessionResponse = {
+  session: SessionModel;
+  user: SignInUser;
+};
+
+const baseUrl = '/auth';
 
 export const userApi = {
   signUp: (user: NewUser) => {
-    console.log("Signing up", user);
+    console.log('Signing up', user);
     return fetchApi<CreateUserResponse>(`${baseUrl}/sign-up`, {
       method: 'POST',
       body: JSON.stringify(user),
@@ -37,8 +42,6 @@ export const userApi = {
       body: JSON.stringify(user),
     });
 
-    console.log("Sign in result", result);
-
     return result;
   },
 
@@ -49,8 +52,8 @@ export const userApi = {
   },
 
   getSession: () => {
-    return fetchApi<SessionModel>(`${baseUrl}/session`, {
+    return fetchApi<SessionResponse>(`${baseUrl}/session`, {
       method: 'GET',
     });
-  }
-}
+  },
+};

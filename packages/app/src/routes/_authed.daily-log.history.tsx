@@ -1,20 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import React, { useState } from 'react'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import PageHeader from '@/components/PageHeader'
+import PageHeader from '@/components/PageHeader';
+import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { createFileRoute } from '@tanstack/react-router';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState } from 'react';
 
 export const Route = createFileRoute('/_authed/daily-log/history')({
   component: HistoricalDailyLogs,
-})
+});
 
 // Mock data
 const mockDailyLogs = [
@@ -83,28 +76,24 @@ const mockDailyLogs = [
     ],
     notes: 'Fussy during afternoon nap.',
   },
-]
+];
 
 function formatDuration(minutes: number) {
-  const hours = Math.floor(minutes / 60)
-  const mins = minutes % 60
-  return `${hours}h ${mins}m`
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours}h ${mins}m`;
 }
 
 function formatDiaperCounts(wet: number, dirty: number, both: number) {
-  return `${wet}W ${dirty}D ${both}B`
+  return `${wet}W ${dirty}D ${both}B`;
 }
 
 function HistoricalDailyLogs() {
-  const [expandedRows, setExpandedRows] = useState<number[]>([])
+  const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
   const toggleRow = (rowId: number) => {
-    setExpandedRows((prev) =>
-      prev.includes(rowId)
-        ? prev.filter((id) => id !== rowId)
-        : [...prev, rowId],
-    )
-  }
+    setExpandedRows((prev) => (prev.includes(rowId) ? prev.filter((id) => id !== rowId) : [...prev, rowId]));
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -117,7 +106,7 @@ function HistoricalDailyLogs() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-10"></TableHead>
+              <TableHead className="w-10" />
               <TableHead className="w-36">Date</TableHead>
               <TableHead className="w-40">Feedings</TableHead>
               <TableHead className="w-40">Diapers</TableHead>
@@ -130,11 +119,7 @@ function HistoricalDailyLogs() {
               <React.Fragment key={log.id}>
                 <TableRow>
                   <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleRow(log.id)}
-                    >
+                    <Button variant="ghost" size="sm" onClick={() => toggleRow(log.id)}>
                       {expandedRows.includes(log.id) ? (
                         <ChevronUp className="h-4 w-4" />
                       ) : (
@@ -142,40 +127,25 @@ function HistoricalDailyLogs() {
                       )}
                     </Button>
                   </TableCell>
-                  <TableCell className="font-medium">
-                    {new Date(log.date).toLocaleDateString()}
-                  </TableCell>
+                  <TableCell className="font-medium">{new Date(log.date).toLocaleDateString()}</TableCell>
                   <TableCell>
                     <div>
                       <div>Total: {log.feeding.totalCount}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {log.feeding.totalAmount}ml
-                      </div>
+                      <div className="text-sm text-muted-foreground">{log.feeding.totalAmount}ml</div>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div>
-                      <div>
-                        Total:{' '}
-                        {log.diapers.wetCount +
-                          log.diapers.dirtyCount +
-                          log.diapers.bothCount}
-                      </div>
+                      <div>Total: {log.diapers.wetCount + log.diapers.dirtyCount + log.diapers.bothCount}</div>
                       <div className="text-sm text-muted-foreground">
-                        {formatDiaperCounts(
-                          log.diapers.wetCount,
-                          log.diapers.dirtyCount,
-                          log.diapers.bothCount,
-                        )}
+                        {formatDiaperCounts(log.diapers.wetCount, log.diapers.dirtyCount, log.diapers.bothCount)}
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div>
                       <div>{formatDuration(log.sleep.totalDuration)}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {log.sleep.napCount} naps
-                      </div>
+                      <div className="text-sm text-muted-foreground">{log.sleep.napCount} naps</div>
                     </div>
                   </TableCell>
                   <TableCell className="">{log.notes}</TableCell>
@@ -186,9 +156,7 @@ function HistoricalDailyLogs() {
                       <div className="p-4">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div>
-                            <h4 className="font-semibold mb-2">
-                              Feeding Details
-                            </h4>
+                            <h4 className="font-semibold mb-2">Feeding Details</h4>
                             <ul className="space-y-1 text-sm">
                               <li>Breast: {log.feeding.breastCount}</li>
                               <li>Bottle: {log.feeding.bottleCount}</li>
@@ -197,25 +165,15 @@ function HistoricalDailyLogs() {
                             </ul>
                           </div>
                           <div>
-                            <h4 className="font-semibold mb-2">
-                              Sleep Details
-                            </h4>
+                            <h4 className="font-semibold mb-2">Sleep Details</h4>
                             <ul className="space-y-1 text-sm">
-                              <li>
-                                Total Sleep:{' '}
-                                {formatDuration(log.sleep.totalDuration)}
-                              </li>
-                              <li>
-                                Longest Stretch:{' '}
-                                {formatDuration(log.sleep.longestStretch)}
-                              </li>
+                              <li>Total Sleep: {formatDuration(log.sleep.totalDuration)}</li>
+                              <li>Longest Stretch: {formatDuration(log.sleep.longestStretch)}</li>
                               <li>Number of Naps: {log.sleep.napCount}</li>
                             </ul>
                           </div>
                           <div>
-                            <h4 className="font-semibold mb-2">
-                              Diaper Details
-                            </h4>
+                            <h4 className="font-semibold mb-2">Diaper Details</h4>
                             <ul className="space-y-1 text-sm">
                               <li>Wet: {log.diapers.wetCount}</li>
                               <li>Dirty: {log.diapers.dirtyCount}</li>
@@ -233,7 +191,7 @@ function HistoricalDailyLogs() {
         </Table>
       </div>
     </div>
-  )
+  );
 }
 
-export default HistoricalDailyLogs
+export default HistoricalDailyLogs;

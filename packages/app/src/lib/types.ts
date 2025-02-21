@@ -1,15 +1,15 @@
 export type ApiResponse<T> =
   | {
-    data: T;
-    error: null;
-  }
+      data: T;
+      error: null;
+    }
   | {
-    data: null;
-    error: {
-      message: string;
-      code?: string;
+      data: null;
+      error: {
+        message: string;
+        code?: string;
+      };
     };
-  };
 
 export const CaregiverRelationship = {
   MOTHER: 'mother',
@@ -19,7 +19,7 @@ export const CaregiverRelationship = {
   OTHER: 'other',
 } as const;
 
-export type CaregiverRelationship = typeof CaregiverRelationship[keyof typeof CaregiverRelationship];
+export type CaregiverRelationship = (typeof CaregiverRelationship)[keyof typeof CaregiverRelationship];
 
 export interface Caregiver {
   id: number;
@@ -38,7 +38,7 @@ export interface BabyModel {
   dateOfBirth: string;
 }
 
-export type Baby = Omit<BabyModel, "id">
+export type Baby = Omit<BabyModel, 'id'>;
 
 export interface NewUser {
   name: string;

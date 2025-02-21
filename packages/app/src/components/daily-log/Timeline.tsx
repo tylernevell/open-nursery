@@ -1,6 +1,6 @@
-import { Card, CardContent } from "../ui/card";
-import { ScrollArea } from "../ui/scroll-area";
-import { timelineData as sampleData } from "./data/timeline-entries";
+import { Card, CardContent } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { timelineData as sampleData } from './data/timeline-entries';
 
 interface TimelineEntryProps {
   time: string;
@@ -9,12 +9,7 @@ interface TimelineEntryProps {
   icon: React.ElementType;
 }
 
-export function TimelineEntry({
-  time,
-  type,
-  details,
-  icon: Icon,
-}: Readonly<TimelineEntryProps>) {
+export function TimelineEntry({ time, type, details, icon: Icon }: Readonly<TimelineEntryProps>) {
   return (
     <Card className="mb-4">
       <CardContent className="p-4">
@@ -43,14 +38,8 @@ export default function TimelineSection() {
         {/* <button className="text-sm text-muted-foreground">View full log</button> */}
       </div>
       <ScrollArea className="h-[600px] w-full">
-        {sampleData.map((data, i) => (
-          <TimelineEntry
-            key={i}
-            time={data.time}
-            type={data.type}
-            details={data.details}
-            icon={data.icon}
-          />
+        {sampleData.map((data) => (
+          <TimelineEntry key={data.time} time={data.time} type={data.type} details={data.details} icon={data.icon} />
         ))}
       </ScrollArea>
     </div>

@@ -1,16 +1,13 @@
-import type { ApiResponse } from "../types";
+import type { ApiResponse } from '../types';
 
-export async function fetchApi<T>(
-  endpoint: string,
-  options: RequestInit = {},
-): Promise<ApiResponse<T>> {
+export async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
   const API_URL = 'http://localhost:3000/api';
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       ...options,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...options.headers,
       },
       credentials: 'include',
@@ -21,7 +18,7 @@ export async function fetchApi<T>(
     return {
       data: null,
       error: {
-        message: error instanceof Error ? error.message : "Unknown error occurred",
+        message: error instanceof Error ? error.message : 'Unknown error occurred',
       },
     };
   }
