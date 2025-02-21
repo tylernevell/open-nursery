@@ -36,6 +36,11 @@
       "trailingCommas": "es5"
     }
   },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",

@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "yarn workspaces foreach -A --include @internal/app --include @internal/backend --parallel --jobs unlimited -v -i run dev",
     "tsc": "yarn workspaces foreach -A --parallel --jobs unlimited -v -i run tsc",
-    "format": "biome format --write packages/*",
-    "lint": "biome lint --write packages/*",
-    "check": "biome check --write packages/*",
+    "format": "biome format --write .",
+    "lint": "biome lint --write .",
+    "check": "biome check --write .",
+    "check:all": "biome check . --no-errors-on-unmatched --files-ignore-unknown=true",
     "postinstall": "husky install",
     "prepare": "husky",
     "lint-staged": "lint-staged"
@@ -25,11 +26,9 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
-  "workspaces": [
-    "./packages/*"
-  ],
+  "workspaces": ["./packages/*"],
   "packageManager": "yarn@4.6.0",
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "yarn check"
+    "*": "yarn check:all"
   }
 }
