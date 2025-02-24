@@ -6,7 +6,7 @@ import UpcomingTasksList from './UpcomingTasksList';
 
 export default function DailyLog() {
   return (
-    <div className="container mx-auto p-4">
+    <div className="w-full container mx-auto p-4">
       <PageHeader title="Daily Log">
         <LogEventForm />
       </PageHeader>
@@ -21,7 +21,7 @@ export default function DailyLog() {
       <hr className="my-6" />
 
       <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-1 space-y-6">
+        <div className="col-span-1 w-full">
           <UpcomingTasksList />
         </div>
 

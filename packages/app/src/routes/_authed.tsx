@@ -15,9 +15,9 @@ function AuthedLayout() {
     return <div>Loading...</div>; // Or your loading component
   }
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
 
   return (
     <SidebarProvider>

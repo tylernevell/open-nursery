@@ -37,7 +37,7 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => (
     <CardContent>
       <div className="flex justify-center mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <p className="text-gray-600 min-h-24">{description}</p>
     </CardContent>
   </Card>
 );
