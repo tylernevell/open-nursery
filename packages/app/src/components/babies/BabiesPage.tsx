@@ -16,7 +16,7 @@ export function BabiesPage() {
   });
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner>Loading...</Spinner>;
   }
 
   const activeBabies = babies?.filter((baby) => baby.status === 'active');
