@@ -12,7 +12,6 @@
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "check": "biome check --write .",
-    "check:all": "biome check . --no-errors-on-unmatched --files-ignore-unknown=true",
     "postinstall": "husky install",
     "prepare": "husky",
     "lint-staged": "lint-staged"
@@ -29,6 +28,6 @@
   "workspaces": ["./packages/*"],
   "packageManager": "yarn@4.6.0",
   "lint-staged": {
-    "*": "yarn check:all"
+    "*": "yarn check"
   }
 }
