@@ -1,6 +1,6 @@
 import { userApi } from '@/lib/apis/userApi';
 import type { SignInUser } from '@/lib/types';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 interface AuthContextType {
   user: SignInUser | null;
@@ -30,17 +30,19 @@ export function AuthProvider({ children }: Readonly<{ children: React.ReactNode 
     initAuth();
   }, []);
 
-  const signIn = async (credentials: SignInUser) => {
+  const signIn = useCallback(async (credentials: SignInUser) => {
     const response = await userApi.signIn(credentials);
     setUser(response.data?.user ?? null);
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await userApi.signOut();
     setUser(null);
-  };
+  }, []);
 
-  return <AuthContext.Provider value={{ user, isLoading, signIn, signOut }}>{children}</AuthContext.Provider>;
+  const contextValue = useMemo(() => ({ user, isLoading, signIn, signOut }), [user, isLoading, signIn, signOut]);
+
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

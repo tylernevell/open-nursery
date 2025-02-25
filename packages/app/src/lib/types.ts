@@ -36,9 +36,40 @@ export interface BabyModel {
   id: number;
   name: string;
   dateOfBirth: string;
+  gender: string;
+  birthWeight: number;
+  birthLength: number;
+  currentWeight: number;
+  currentLength: number;
+  notes: string;
 }
 
-export type Baby = Omit<BabyModel, 'id'>;
+export interface Baby {
+  id: number;
+  name: string;
+  dateOfBirth: Date | string;
+  birthWeight?: number; // in grams
+  birthLength?: number; // in millimeters
+  gender?: 'male' | 'female' | 'other';
+  notes?: string;
+  currentWeight?: number; // in grams
+  currentLength?: number; // in millimeters
+  status: 'active' | 'archived';
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+export interface BabyWithCaregivers extends Baby {
+  caregivers: Array<{
+    caregiver: {
+      id: number;
+      name: string;
+      email: string;
+      relationship: 'parent';
+    };
+    role: 'primary' | 'secondary' | 'support';
+  }>;
+}
 
 export interface NewUser {
   name: string;
