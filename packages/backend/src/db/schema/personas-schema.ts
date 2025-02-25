@@ -35,7 +35,7 @@ export type NewCaregiver = InferInsertModel<typeof caregiversTable>;
 export const babiesTable = t.pgTable("babies", {
   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   name: t.varchar("name", { length: 256 }).notNull(),
-  dateOfBirth: t.timestamp("date_of_birth").notNull(),
+  dateOfBirth: t.date("date_of_birth").notNull(),
   birthWeight: t.integer("birth_weight"), // in grams
   birthLength: t.integer("birth_length"), // in millimeters
   gender: t.varchar("gender", {

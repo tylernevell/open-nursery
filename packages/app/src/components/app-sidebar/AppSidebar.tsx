@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate } from '@tanstack/react-router';
-import { LogOut, LogsIcon, Settings2 } from 'lucide-react';
+import { Baby, LogOut, LogsIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { NavMain } from './nav-main';
 
@@ -35,9 +35,9 @@ const navMainItems = [
 
 const sidebarMenuItems = [
   {
-    title: 'Settings',
-    url: '/settings',
-    icon: Settings2,
+    title: 'Babies',
+    url: '/babies',
+    icon: Baby,
   },
 ];
 

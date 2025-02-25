@@ -1,5 +1,5 @@
 import { zValidator } from '@hono/zod-validator';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, inArray } from 'drizzle-orm';
 import { Hono } from 'hono';
 import type { auth } from 'src/lib/auth';
 import type { ApiResponse } from 'src/lib/types';
@@ -8,9 +8,14 @@ import {
   type BabyWithCaregivers,
   babiesTable,
   babyToCaregiversTable,
+  caregiversTable,
   insertBabySchema,
 } from '~/schema/personas-schema';
 import { nurseryDb } from '~/service';
+
+type CreateBabyResponse = ApiResponse<Baby>;
+type GetBabiesResponse = ApiResponse<Baby[]>;
+
 const app = new Hono<{
   Variables: {
     user: typeof auth.$Infer.Session.user;
@@ -23,23 +28,38 @@ app.get('/', async (c) => {
   try {
     const userId = c.get('user').id;
 
-    const babies = await nurseryDb.query.babiesTable.findMany({
-      with: {
-        caregivers: {
-          columns: {
-            role: true,
-          },
-          where: eq(babyToCaregiversTable.caregiverId, Number(userId)),
-        },
-      },
+    // First get the caregiver profile
+    const caregiver = await nurseryDb.query.caregiversTable.findFirst({
+      where: eq(caregiversTable.userId, userId),
     });
 
-    return c.json<ApiResponse<Baby[]>>({
+    if (!caregiver) {
+      return c.json<GetBabiesResponse>({
+        data: [],
+        error: null,
+      });
+    }
+
+    // Get the babies through the relationship table
+    const babyRelations = await nurseryDb
+      .select()
+      .from(babyToCaregiversTable)
+      .where(eq(babyToCaregiversTable.caregiverId, caregiver.id));
+
+    const babyIds = babyRelations.map((rel) => rel.babyId);
+
+    // Then get all the babies that match those IDs
+    const babies = await nurseryDb.query.babiesTable.findMany({
+      where: babyIds.length > 0 ? inArray(babiesTable.id, babyIds) : undefined,
+    });
+
+    return c.json<GetBabiesResponse>({
       data: babies,
       error: null,
     });
   } catch (error) {
-    return c.json<ApiResponse<Baby[]>>(
+    console.error('Error fetching babies:', error);
+    return c.json<GetBabiesResponse>(
       {
         data: null,
         error: {
@@ -57,26 +77,72 @@ app.post('/', zValidator('json', insertBabySchema), async (c) => {
   try {
     const userId = c.get('user').id;
 
+    // First, verify the user has a caregiver profile
+    const caregiver = await nurseryDb.query.caregiversTable.findFirst({
+      where: eq(caregiversTable.userId, userId),
+    });
+
+    if (!caregiver) {
+      return c.json<ApiResponse<Baby>>(
+        {
+          data: null,
+          error: {
+            message: 'Caregiver profile not found',
+            code: 'CAREGIVER_NOT_FOUND',
+          },
+        },
+        404
+      );
+    }
+
     const body = await c.req.json();
 
     // Start a transaction to create baby and relationship
     const result = await nurseryDb.transaction(async (tx) => {
-      const [baby] = await tx.insert(babiesTable).values(body).returning();
+      // Create the baby profile
+      const [baby] = await tx
+        .insert(babiesTable)
+        .values({
+          ...body,
+          status: 'active',
+          currentLength: body.birthLength,
+          currentWeight: body.birthWeight,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .returning();
 
+      // Create the relationship between baby and caregiver
       await tx.insert(babyToCaregiversTable).values({
         babyId: baby.id,
-        caregiverId: Number(userId),
+        caregiverId: caregiver.id,
         role: 'primary',
       });
 
-      return baby;
+      // Return the created baby
+      return baby; // Just return the baby object directly
     });
 
+    if (!result) {
+      return c.json<ApiResponse<Baby>>(
+        {
+          data: null,
+          error: {
+            message: 'Failed to create baby profile',
+            code: 'CREATE_ERROR',
+          },
+        },
+        500
+      );
+    }
+
+    // Return the result
     return c.json<ApiResponse<Baby>>({
       data: result,
       error: null,
     });
   } catch (error) {
+    console.error('Failed to create baby profile:', error);
     return c.json<ApiResponse<Baby>>(
       {
         data: null,
