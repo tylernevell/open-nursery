@@ -13,8 +13,7 @@ function AuthedLayout() {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    // todo: build a loading spinner
-    return <Spinner />;
+    return <Spinner>Loading...</Spinner>;
   }
 
   // todo: refactor this when auth is ready
