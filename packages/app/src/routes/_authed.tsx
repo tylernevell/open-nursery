@@ -1,5 +1,6 @@
 import { AppSidebar } from '@/components/app-sidebar/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { Spinner } from '@/components/ui/spinner';
 import { useAuth } from '@/context/AuthContext';
 import { Outlet, createFileRoute } from '@tanstack/react-router';
 import { Toaster } from 'sonner';
@@ -12,8 +13,7 @@ function AuthedLayout() {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    // todo: build a loading spinner
-    return <div>Loading auth state...</div>;
+    return <Spinner>Loading...</Spinner>;
   }
 
   // todo: refactor this when auth is ready
