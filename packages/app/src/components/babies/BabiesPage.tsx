@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { babyApi } from '@/lib/apis/babyApi';
 import { useQuery } from '@tanstack/react-query';
 import { PlusCircle } from 'lucide-react';
+import { Spinner } from '../ui/spinner';
 
 export function BabiesPage() {
   const { data: babies, isLoading } = useQuery({
@@ -15,8 +16,7 @@ export function BabiesPage() {
   });
 
   if (isLoading) {
-    // todo: build a loading spinner
-    return <p>Loading...</p>;
+    return <Spinner>Loading...</Spinner>;
   }
 
   const activeBabies = babies?.filter((baby) => baby.status === 'active');
